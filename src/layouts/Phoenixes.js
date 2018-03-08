@@ -153,10 +153,10 @@ export default class Phoenixes extends Component {
   }
 
   render() {
-    if (this.props.network !== RIGHT_NETWORK_ID) { return (<Jumbotron><h1>Wrong network</h1></Jumbotron>)}
+    if (this.props.network !== RIGHT_NETWORK_ID) { return (<Jumbotron className="homeTitle"><h1>Wrong network</h1></Jumbotron>)}
     return (
       <div>
-        <Jumbotron>
+        <Jumbotron className="homeDescription">
         <h1>Phoenix Pool</h1> 
         <Odometer value={this.state.PHOENIX_POOL} duration={2000} format={'(,ddd).ddddddd'}/>
         <br />

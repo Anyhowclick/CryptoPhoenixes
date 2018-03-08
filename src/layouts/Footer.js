@@ -8,7 +8,7 @@ export default class Footer extends Component {
   render() {
     return (
         <div className="footer">
-        <p>Play responsibly. Do not invest more than you can lose. Made by Anyhowclick.</p>
+        <p>Play responsibly. Do not invest more than you can lose. Made by Anyhowclick and Tilly.</p>
         </div>
     )
   }

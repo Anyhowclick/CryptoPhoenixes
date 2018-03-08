@@ -7,16 +7,16 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-      <Jumbotron>
+      <Jumbotron className="homeTitle">
         <h1>Crypto Phoenixes</h1>
         <p>A strategic collectibles game</p>
       </Jumbotron>
         
-        <Jumbotron>
+        <Jumbotron className="homeDescription">
         <Container>
         <Row>
         <Col xs="12" sm="6" lg="4">
-        <Card>
+        <Card className="displayCard">
         <CardImg top width="100%" src={require("../assets/Iron Man.jpg")} alt="Card image cap" />
         <CardBody>
         <CardTitle className="cardTitleText">Iron Man</CardTitle>
@@ -35,7 +35,7 @@ export default class Home extends Component {
         </Card>
         </Col>
 
-        <Col xs="12" sm="6" lg="8">
+        <Col xs="12" sm="6" lg="8" className="attributesDescription">
         <h2>Dividends</h2>
         <p>
           2.5% of each phoenix sale goes to the dividends pool, which is distributed to all other phoenix card owners. This attribute determines

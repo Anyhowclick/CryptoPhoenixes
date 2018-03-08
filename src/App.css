@@ -21,13 +21,38 @@ h1, h2, h3 {
 }
 
 .jumbotron {
-  background-color: rgb(255,200,0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.homeTitle {
+  color: rgb(255, 120, 71);
+}
+
+.homeTitle h1 {
+  font-size: 4rem;
+}
+
+.homeTitle p {
+  font-size: 1rem;
+}
+
+.homeDescription {
+  color: white;
+  padding: 2%;
+}
+
+.displayCard {
+  color: black;
+}
+
+.attributesDescription {
+  padding: 6%;
 }
 
 /* NAVBAR */
 .navbar {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
-  background: white;
+  background: rgb(235, 235, 235);
 }
 
 .navbar a {
@@ -35,13 +60,22 @@ h1, h2, h3 {
 }
 
 .faqTitle {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0.5%;
+  font-size: 2em;
   color: white;
   text-align: center;
+}
+
+.list-group-item {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
 }
 
 .list-group-item.active {
   background-color: orangered;
   border-color: orangered;
+  font-size: 1.2em;
 }
 
 .card {

@@ -59,18 +59,13 @@ class About extends Component {
             </ListGroupItem>
             <ListGroupItem active>Is this a get rich quick scheme?</ListGroupItem>
             <ListGroupItem>
-            No. The game has been designed with price sustainability in mind. Price increases are relatively smaller compared to other games. 
-            Coupled with the relatively low payout to the previous owner of 83-85%, this means that those looking for a quick flip 
-            will find better returns elsewhere. To give an example, having paid 0.36 ETH for a phoenix, one will only receive 0.39 ETH
-            in return for the next purchase.
+            No. The game has been designed to keep prices sustainably low for the long term.
             </ListGroupItem>
             <ListGroupItem active>What is the Phoenix pool for? What happens when a phoenix explodes?</ListGroupItem>
             <ListGroupItem>
-                9-13% of all transactions made contribute to the Phoenix pool. When the owner of a phoenix decides to explode it, 
-                he will get a portion of the accumulated funds in this pool. How much he gets is determined by the phoenix's explosive power. Note that 
-                the phoenix's price goes down by 80% or 90% (depending on its price) after each explosion to make the phoenix 
-                cheaper for others to snatch and to generate more funds for the pool. Also note that each phoenix has a <strong>cooldown </strong> 
-                after every explosion, meaning, the owner has to wait a period of time before being able to claim from the pool again.
+                10-12% of all transactions go towards the Phoenix pool. A phoenix owner can choose to explode his phoenix to claim a portion
+                from this pool, but doing so will cause the price of his phoenix to <strong>drop significantly.</strong> The phoenix will take
+                some time to grow and get ready for its next explosion.
             </ListGroupItem>
 
             <ListGroupItem active>What are the incentives for exploding a phoenix?</ListGroupItem>
@@ -85,9 +80,9 @@ class About extends Component {
             <ListGroupItem active>What are the disincentives for exploding a phoenix?</ListGroupItem>
             <ListGroupItem>
                 <ol>
+                <li>Earning dividends for being a phoenix owner</li>
                 <li>The price of your phoenix <strong>drops by 80 or 90%, depending on the current price</strong></li>
-                <li>As the current owner, you get a percentage from the dividend pool.</li>
-                <li>Wait for the phoenix pool to grow to a desirable amount.</li>
+                <li>Wait for the phoenix pool to grow to a larger amount.</li>
                 <li>Someone snatches the phoenix from you for a higher price, and you get majority of the proceeds from that sale.</li>
                 </ol>
             </ListGroupItem>
@@ -103,19 +98,17 @@ class About extends Component {
                 Cooldown: Time needed between each explosion<br />
                 Explosive Power: Percentage of phoenix pool obtained upon explosion<br />
                 Dividends: Percentage of dividends received from the dividend pool<br /><br />
-                In general, the faster the cooldown rate of the phoenix, the less powerful it is. That isn't necessarily a bad thing though,
-                since it is able to claim more frequently from the phoenix pool.
+                In general, the faster the cooldown rate of the phoenix, the less powerful it is.
                 < br/>
                 <strong>Disclaimer: The attribute values of a phoenix are subject to changes in the beta period.</strong>
             </ListGroupItem>
 
-            <ListGroupItem active>Why is the developer allowed to change the attributes of the phoenixes?</ListGroupItem>
+            <ListGroupItem active>Why are the developers allowed to change the attributes of the phoenixes?</ListGroupItem>
             <ListGroupItem>
-                The beta period is set to be 6 months (exactly 180 days from contract creation). This is to allow me to fine-tune
-                the game. After the 6 month period, anyone can call the closeBeta() function of the smart contract to prevent any further 
+                The beta period is set to be 3 months (exactly 90 days from contract creation). This is to allow us to fine-tune
+                the game. After the 3 month period, anyone can call the closeBeta() function of the smart contract to prevent any further 
                 tweaking.
             </ListGroupItem>
-
         </ListGroup>
         </Container>
     </div>
