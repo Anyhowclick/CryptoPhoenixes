@@ -1,0 +1,96 @@
+/* PAGE */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body,
+.pure-g [class*=pure-u] {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  height: 100%;
+}
+
+body {
+  margin: 0 0 30px;
+  background-image: url('./assets/BG.jpg');
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+}
+
+.jumbotron {
+  background-color: rgb(255,200,0);
+}
+
+/* NAVBAR */
+.navbar {
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  background: white;
+}
+
+.navbar a {
+  color: #fff;
+}
+
+.faqTitle {
+  color: white;
+  text-align: center;
+}
+
+.list-group-item.active {
+  background-color: orangered;
+  border-color: orangered;
+}
+
+.card {
+  font-size: small;
+}
+
+.cardTitleText {
+  font-size: 1rem;
+}
+
+.explosionText {
+  margin-bottom: 5%;
+  font-size: x-small;
+}
+
+.metamaskButton {
+  margin-bottom: 1%;
+}
+
+.claimFundButton {
+  margin-top: 2%;
+}
+
+.buyButton {
+  font-size: x-small;
+}
+
+.wrongNetworkBar {
+  background-color: #ffdd57
+}
+
+/* FORMS */
+
+.pure-form {
+  display: inline-block;
+}
+
+#loadingContainer {
+  min-height: 80%;
+  padding: 10%;
+  color: white;
+  vertical-align: middle;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  bottom:0;
+  color: white;
+  background-color: rgba(255,0,0,0.5);
+}
