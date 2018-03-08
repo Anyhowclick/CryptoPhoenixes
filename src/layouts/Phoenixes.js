@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Jumbotron, Container, Row } from 'reactstrap'
-import { InfuraCryptoPhoenixes, RIGHT_NETWORK_ID } from './Constants'
+import { InfuraCryptoPhoenixes, RIGHT_NETWORK_ID, TOTAL_PHOENIX_NUM } from './Constants'
 import PhoenixCard from './PhoenixCard'
 import UserFundButton from './UserFundButton'
 import { notify } from 'react-notify-toast'
@@ -95,7 +95,7 @@ export default class Phoenixes extends Component {
     let self = this,
     phoenixes = []
 
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < TOTAL_PHOENIX_NUM; i++) {
       let phoenix = InfuraCryptoPhoenixes.getPhoenix(i)
       phoenix = {
         id: i,
@@ -153,11 +153,11 @@ export default class Phoenixes extends Component {
   }
 
   render() {
-    if (this.props.network !== RIGHT_NETWORK_ID) { return (<Jumbotron className="homeTitle"><h1>Wrong network</h1></Jumbotron>)}
+    if (this.props.network != RIGHT_NETWORK_ID) { return (<Jumbotron className="homeTitle"><h1>Wrong network</h1></Jumbotron>)}
     return (
       <div>
         <Jumbotron className="homeDescription">
-        <h1>Phoenix Pool</h1> 
+        <h1 className>Phoenix Pool</h1> 
         <Odometer value={this.state.PHOENIX_POOL} duration={2000} format={'(,ddd).ddddddd'}/>
         <br />
         <UserFundButton 

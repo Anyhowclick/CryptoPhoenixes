@@ -79,11 +79,16 @@ h1, h2, h3 {
 }
 
 .card {
-  font-size: small;
+  font-size: 0.75rem;
+  margin-bottom: 5%;
 }
 
 .cardTitleText {
   font-size: 1rem;
+}
+
+.cardSubtitleText {
+  font-size: 0.8rem;
 }
 
 .explosionText {
@@ -105,6 +110,14 @@ h1, h2, h3 {
 
 .wrongNetworkBar {
   background-color: #ffdd57
+}
+
+.boldText {
+  color: #ffdd57;
+}
+
+.boldModalText {
+  color: red;
 }
 
 /* FORMS */

@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import { Container } from 'reactstrap'
-import MetamaskLock from '../assets/MetamaskLock.PNG'
+import { Jumbotron } from 'reactstrap'
+import MetamaskLock from '../assets/MetamaskLock.jpg'
 
 export default class MetamaskLocked extends Component {
 
   render() {
     return (
       <div>
-          <Container>
-          <h1>Kindly unlock metamask</h1>
+          <Jumbotron>
+          <h1 className="homeDescription">Kindly unlock metamask</h1>
           <hr />
           <img src={MetamaskLock} />
           <hr />
-        </Container>
+        </Jumbotron>
       </div>
       )
     }

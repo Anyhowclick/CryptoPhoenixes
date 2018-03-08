@@ -56,7 +56,8 @@ export default class ExplosionButton extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Caution</ModalHeader>
         <ModalBody>
-        This phoenix will drop in price from <strong>{this.props.price}</strong> ETH to <strong>{this.calculatePriceDrop()} ETH!</strong>
+        You are claiming <strong className="boldModalText">{this.props.explosivePower}%</strong> from the phoenix pool. However, this phoenix 
+        will drop in price from <strong className="boldModalText">{this.props.price} ETH to {this.calculatePriceDrop()} ETH!</strong>
         <br />
         Do you wish to continue?
         </ModalBody>

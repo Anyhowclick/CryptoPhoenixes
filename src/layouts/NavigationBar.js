@@ -18,9 +18,9 @@ export default class NavigationBar extends React.Component {
   shouldComponentUpdate(nextProps,nextState) {
     return (
       (
-        (this.props.account !== nextProps.account) || 
-        (this.props.network !== nextProps.network) ||
-        (this.state.collapsed !== nextState.collapsed)
+        (this.props.account != nextProps.account) || 
+        (this.props.network != nextProps.network) ||
+        (this.state.collapsed != nextState.collapsed)
       )
     )
   }
@@ -50,7 +50,6 @@ export default class NavigationBar extends React.Component {
   }
 
   isWrongNetwork() {
-    console.log(this.props.network)
     if((this.props.network === RIGHT_NETWORK_ID) || (!this.props.network) || (this.props.network === -1)) {
       return null
     }

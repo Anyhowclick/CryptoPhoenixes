@@ -64,7 +64,7 @@ class About extends Component {
             <ListGroupItem active>What is the Phoenix pool for? What happens when a phoenix explodes?</ListGroupItem>
             <ListGroupItem>
                 10-12% of all transactions go towards the Phoenix pool. A phoenix owner can choose to explode his phoenix to claim a portion
-                from this pool, but doing so will cause the price of his phoenix to <strong>drop significantly.</strong> The phoenix will take
+                from this pool, but doing so will cause the price of his phoenix to <strong className="boldText">drop significantly.</strong> The phoenix will take
                 some time to grow and get ready for its next explosion.
             </ListGroupItem>
 
@@ -81,7 +81,7 @@ class About extends Component {
             <ListGroupItem>
                 <ol>
                 <li>Earning dividends for being a phoenix owner</li>
-                <li>The price of your phoenix <strong>drops by 80 or 90%, depending on the current price</strong></li>
+                <li>The price of your phoenix <strong className="boldText">drops by 80 or 90%, depending on the current price</strong></li>
                 <li>Wait for the phoenix pool to grow to a larger amount.</li>
                 <li>Someone snatches the phoenix from you for a higher price, and you get majority of the proceeds from that sale.</li>
                 </ol>
@@ -90,7 +90,7 @@ class About extends Component {
             <ListGroupItem>
                 If its price is more than 1 ETH, 80%. Otherwise, 90%. It will however never go below the base price of 0.0025 ETH.
                 < br/>
-                <strong>Disclaimer: These parameters are subject to tweaks in the beta period.</strong>
+                <strong className="boldText">Disclaimer: These parameters are subject to tweaks in the beta period.</strong>
             </ListGroupItem>
             
             <ListGroupItem active>Phoenix attributes</ListGroupItem>
@@ -100,7 +100,7 @@ class About extends Component {
                 Dividends: Percentage of dividends received from the dividend pool<br /><br />
                 In general, the faster the cooldown rate of the phoenix, the less powerful it is.
                 < br/>
-                <strong>Disclaimer: The attribute values of a phoenix are subject to changes in the beta period.</strong>
+                <strong className="boldText">Disclaimer: The attribute values of a phoenix are subject to changes in the beta period.</strong>
             </ListGroupItem>
 
             <ListGroupItem active>Why are the developers allowed to change the attributes of the phoenixes?</ListGroupItem>

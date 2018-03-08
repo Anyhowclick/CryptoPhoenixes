@@ -6,7 +6,7 @@ import ExplosionButton from './ExplosionButton'
 import BuyButton from './BuyButton'
 import PauseButton from './PauseButton'
 
-const coundownRenderer = ({ isOwner, id, price, web3, CryptoPhoenixes, showNotification, hours, minutes, seconds, completed }) => {
+const coundownRenderer = ({ isOwner, id, price, web3, CryptoPhoenixes, showNotification, explosivePower, hours, minutes, seconds, completed }) => {
   if (completed) {
     // Render a completed state
     return <ExplosionButton 
@@ -14,6 +14,7 @@ const coundownRenderer = ({ isOwner, id, price, web3, CryptoPhoenixes, showNotif
             id={id}
             price={price}
             web3={web3}
+            explosivePower={explosivePower}
             CryptoPhoenixes={CryptoPhoenixes}
             showNotification={showNotification}
             />
@@ -114,7 +115,7 @@ export default class PhoenixCard extends Component {
   }
 
   shorten(string) {
-    if (typeof(string) === 'undefined') {
+    if (typeof(string) == 'undefined') {
       return ''
     }
     return string.slice(0,10)
@@ -131,9 +132,10 @@ export default class PhoenixCard extends Component {
     <Countdown 
     date={date}
     renderer={coundownRenderer} 
-    isOwner={this.state.currentOwner === this.props.web3.eth.accounts[0]}
+    isOwner={this.state.currentOwner == this.props.web3.eth.accounts[0]}
     id={this.props.id} 
     price={this.props.price}
+    explosivePower={this.props.explosivePower/POWER_DENOMINATOR}
     web3={this.props.web3}
     CryptoPhoenixes={this.props.CryptoPhoenixes}
     showNotification={this.props.showNotification}
@@ -150,9 +152,9 @@ export default class PhoenixCard extends Component {
 
     PurchaseEvent.watch(function(err,res) {
       if (!err) {
-        if (res.args._phoenixId === self.props.id) {
+        if (res.args._phoenixId == self.props.id) {
           let price = self.props.web3.fromWei(res.args.price,'ether').toNumber()
-          this.props.showNotification(self.props.name + " bought for " + price + " ETH","warning")
+          self.props.showNotification(self.props.name + " bought for " + price + " ETH","warning")
           let nextPrice = self.props.web3.fromWei(res.args.nextPrice,'ether').toNumber()
           self.updatePriceDisplay(nextPrice)
           self.updateOwnerDisplay(res.args.newOwner)
@@ -164,7 +166,7 @@ export default class PhoenixCard extends Component {
 
     ExplodeEvent.watch(function(err,res) {
       if (!err) {
-        if (res.args.phoenixId === self.props.id) {
+        if (res.args.phoenixId == self.props.id) {
         //Update Phoenix Explosion Time
         let nextExplosionTime = res.args.nextExplosionTime.toNumber(),
         phoenixPrice = self.props.web3.fromWei(res.args.price,'ether').toNumber()
@@ -219,7 +221,11 @@ export default class PhoenixCard extends Component {
       <CardImg top width="100%" src={require('../assets/' + this.props.name + '.jpg')} alt="Card image cap" />
       <CardBody>
         <CardTitle className="cardTitleText">{this.props.name}</CardTitle>
-        <CardSubtitle>Owner: {this.shorten(this.state.currentOwner)}</CardSubtitle>
+        <CardSubtitle className="cardSubtitleText">
+        Owner: {this.shorten(this.state.currentOwner)}
+        <br />
+        Price: {this.state.price}
+        </CardSubtitle>
         <hr />
           <span>Dividend: {this.props.dividendPayout/DIVIDEND_DENOMINATOR}%</span>
           {this.getStatsBar("DIVIDEND",this.props.dividendPayout)}
@@ -231,7 +237,7 @@ export default class PhoenixCard extends Component {
           {this.getExplosionButton()}
           <BuyButton
           paused={this.state.paused}
-          isOwner={this.state.currentOwner === this.props.web3.eth.accounts[0]} 
+          isOwner={this.state.currentOwner == this.props.web3.eth.accounts[0]} 
           id={this.props.id} 
           price={this.state.price} 
           web3={this.props.web3}

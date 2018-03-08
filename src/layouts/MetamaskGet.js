@@ -8,7 +8,7 @@ export default class MetamaskGet extends Component {
     return (
       <div>
       <Jumbotron>
-        <h1>Install Metamask</h1>
+        <h1 className="homeDescription">Install Metamask</h1>
         <img src={MetamaskInstall} />
         <br />
         <Button className="metamaskButton" outline color="warning" href="https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn">

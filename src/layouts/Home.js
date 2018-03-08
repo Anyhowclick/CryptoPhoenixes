@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Jumbotron, Container, Col, Row, Button,
   Card, CardImg, CardBody, CardTitle, CardSubtitle, Progress } from 'reactstrap'
-import {MAX_COOLDOWN, MAX_POWER } from './Constants.js'
+import {MAX_COOLDOWN, MAX_POWER} from './Constants.js'
+import Odometer from 'react-odometerjs'
+
 
 export default class Home extends Component {
   render() {
@@ -46,7 +48,7 @@ export default class Home extends Component {
         <p>
           10-12% of each phoenix sale goes to the Phoenix pool. This attribute determines the percentage claimable out of this pool. Trigger this
           claim by exploding the phoenix. Be wary though, as this will cause the price of the phoenix to
-          <strong> drop significantly!</strong>
+          <strong className="boldText"> drop significantly!</strong>
         </p>
         <hr />
         <h2>Cooldown</h2>
