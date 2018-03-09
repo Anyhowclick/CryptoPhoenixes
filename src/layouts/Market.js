@@ -40,7 +40,7 @@ export default class Market extends Component {
         <div id="loadingContainer">
         <Container>
         <h1>Loading</h1>
-        <ReactAnimatedEllipsis fontSize="20rem"/>
+        <ReactAnimatedEllipsis/>
         </Container>
         </div>
       )

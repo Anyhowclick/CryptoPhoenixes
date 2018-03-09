@@ -14,6 +14,7 @@ body,
 body {
   margin: 0 0 30px;
   background-image: url('./assets/BG.jpg');
+  background-size: 100%;
 }
 
 h1, h2, h3 {
@@ -131,6 +132,7 @@ h1, h2, h3 {
   padding: 10%;
   color: white;
   vertical-align: middle;
+  font-size: 200%;
 }
 
 .footer {
