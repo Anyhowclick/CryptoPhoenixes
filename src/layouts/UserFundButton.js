@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
 import { CRYPTOPHOENIXES_CONTRACT_ADDR } from './Constants'
+import MetamaskGet from './MetamaskGet'
 
 export default class UserFundButton extends Component {
   constructor(props) {
@@ -21,13 +22,17 @@ export default class UserFundButton extends Component {
         self.props.showNotification("Transaction Sent!","success")
       } else {
         self.props.showNotification("Transaction rejected", "error")
-    }
-  })
-}
+      }
+    })
+  }
 
   render() {
-    return (
-      <Button color="success" size="lg" className="claimFundButton" onClick={this.withdrawDividends}>Collect Funds: {this.props.userFunds} ETH</Button>
-      )
+    if (this.props.userFunds == -1) {
+      return (<Button color="warning" size="lg" className="claimFundButton" href="/unlockMetamask">Unlock Metamask</Button>)
+    } else {
+      return (
+        <Button color="success" size="lg" className="claimFundButton" onClick={this.withdrawDividends}>Collect Funds: {this.props.userFunds} ETH</Button>
+        )
+    }
   }
 }

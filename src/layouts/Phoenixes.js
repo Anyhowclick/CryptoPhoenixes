@@ -12,18 +12,20 @@ export default class Phoenixes extends Component {
     super(props)
     this.state = {
       paused: true,
+      account: this.props.web3.eth.accounts[0],
       PHOENIX_POOL: 0,
       PHOENIXES: [],
-      userFunds: 0
+      userFunds: -1
     }
   
     this.getPauseStatus = this.getPauseStatus.bind(this);
     this.getPhoenixes = this.getPhoenixes.bind(this);
     this.getPhoenixPool = this.getPhoenixPool.bind(this);
+    this.getUserFunds = this.getUserFunds.bind(this);
     this.showNotification = notify.createShowQueue();
   }
   
-  componentWillMount() {
+  componentDidMount() {
     this.getPauseStatus()
     this.getPhoenixes()
     this.getPhoenixPool()
@@ -86,6 +88,18 @@ export default class Phoenixes extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.state.account != nextProps.web3.eth.accounts[0]) {
+      this.setState({ account: nextProps.web3.eth.accounts[0] })
+    }
+  }
+  
+  componentDidUpdate(prevProps,prevState) {
+    if(prevState.account != this.state.account) {
+      this.getUserFunds()
+    }
+  }
+
   getPauseStatus() {
     let pausedStatus = InfuraCryptoPhoenixes.paused.call()
     this.setState({ paused: pausedStatus})
@@ -122,9 +136,13 @@ export default class Phoenixes extends Component {
   }
 
   getUserFunds() {
-    let userFunds = InfuraCryptoPhoenixes.userFunds(this.props.web3.eth.accounts[0])
-    userFunds = this.props.web3.fromWei(userFunds, 'ether').toNumber()
-    this.setState({ userFunds: userFunds })
+    if (this.state.account) {
+      let userFunds = InfuraCryptoPhoenixes.userFunds(this.state.account)
+      userFunds = this.props.web3.fromWei(userFunds, 'ether').toNumber()
+      this.setState({ userFunds: userFunds })
+    } else {
+      this.setState({ userFunds: -1})
+    }
   }
 
   renderChildren(phoenixes) {

@@ -22,7 +22,11 @@ export default class Home extends Component {
         <CardImg top width="100%" src={require("../assets/Iron Man.jpg")} alt="Card image cap" />
         <CardBody>
         <CardTitle className="cardTitleText">Iron Man</CardTitle>
-        <CardSubtitle>Owner: 0x12345</CardSubtitle>
+        <CardSubtitle className="cardSubtitleText">
+        Owner: 0x12345
+        <br />
+        Price: 0.0025
+        </CardSubtitle>
         <hr />
         <span>Dividend: 8%</span>
         <Progress striped color="success" value={8} max={MAX_POWER}/> 
