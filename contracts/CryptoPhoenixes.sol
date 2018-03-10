@@ -333,7 +333,7 @@ contract CryptoPhoenixes is Ownable, Pausable {
     uint256 subDevCut = price.mul(6).div(1000); //0.6% to subDev
     
     // 2.5% goes to dividends
-    uint256 shareholderCut = price.mul(25).div(1000);
+    uint256 dividendsCut = price.mul(25).div(1000);
     
     // 0.5% goes to owner of phoenix in previous exploded round
     uint256 previousOwnerCut = price.mul(5).div(1000);
@@ -344,22 +344,10 @@ contract CryptoPhoenixes is Ownable, Pausable {
     // Amount payable to old owner minus the developer's and pools' cuts.
     uint256 outgoingOwnerCut = price.sub(ownerCut);
     outgoingOwnerCut = outgoingOwnerCut.sub(subDevCut);
-    outgoingOwnerCut = outgoingOwnerCut.sub(shareholderCut);
+    outgoingOwnerCut = outgoingOwnerCut.sub(dividendsCut);
     outgoingOwnerCut = outgoingOwnerCut.sub(previousOwnerCut);
     outgoingOwnerCut = outgoingOwnerCut.sub(phoenixPoolCut);
     
-    //Actual transfer
-    devFunds[owner] = devFunds[owner].add(ownerCut);
-    devFunds[subDev] = devFunds[subDev].add(subDevCut);
-    distributeDividends(shareholderCut);
-    PHOENIX_POOL = PHOENIX_POOL.add(phoenixPoolCut);
-    userFunds[previousOwner] = userFunds[previousOwner].add(previousOwnerCut);
-    
-    //handle boundary case where we exclude currentOwner == address(this) when transferring the cut
-    if (outgoingOwner != address(this)) {
-      userFunds[outgoingOwner] = userFunds[outgoingOwner].add(outgoingOwnerCut);
-    }
-
     // set new price
     uint256 nextPrice = getNextPrice(price);
     phoenix.price = nextPrice;
@@ -367,9 +355,21 @@ contract CryptoPhoenixes is Ownable, Pausable {
     // set new owner
     phoenix.currentOwner = incomingOwner;
 
+    //Actual transfer
+    devFunds[owner] = devFunds[owner].add(ownerCut);
+    devFunds[subDev] = devFunds[subDev].add(subDevCut);
+    distributeDividends(dividendsCut);
+    userFunds[previousOwner] = userFunds[previousOwner].add(previousOwnerCut);
+    PHOENIX_POOL = PHOENIX_POOL.add(phoenixPoolCut);
+
+    //handle boundary case where we exclude currentOwner == address(this) when transferring funds
+    if (outgoingOwner != address(this)) {
+      sendFunds(outgoingOwner,outgoingOwnerCut);
+    }
+
     // Send refund to owner if needed
     if (purchaseExcess > 0) {
-      msg.sender.transfer(purchaseExcess);
+      sendFunds(msg.sender,purchaseExcess);
     }
 
     // raise event
@@ -386,12 +386,12 @@ contract CryptoPhoenixes is Ownable, Pausable {
       }
   }
 
-  function distributeDividends(uint256 _shareholderCut) private {
+  function distributeDividends(uint256 _dividendsCut) private {
     uint256 totalPayout = getTotalPayout();
 
     for (uint256 i = 0; i < phoenixes.length; i++) {
       var phoenix = phoenixes[i];
-      var payout = _shareholderCut.mul(phoenix.dividendPayout).div(totalPayout);
+      var payout = _dividendsCut.mul(phoenix.dividendPayout).div(totalPayout);
       userFunds[phoenix.currentOwner] = userFunds[phoenix.currentOwner].add(payout);
     }
   }
@@ -435,15 +435,25 @@ contract CryptoPhoenixes is Ownable, Pausable {
       phoenix.nextExplosionTime = now + (phoenix.cooldown * 1 minutes);
       
       // Finally, payout to user
-      msg.sender.transfer(payout);
+      sendFunds(msg.sender,payout);
       
       //raise event
       PhoenixExploded(_phoenixId, msg.sender, payout, phoenix.price, phoenix.nextExplosionTime);
   }
   
-  /**
-  * @dev Withdraw dev cut.
-  */
+/**
+* @dev Try to send funds immediately
+* If it fails, user has to manually withdraw.
+*/
+  function sendFunds(address _user, uint256 _payout) private {
+    if (!_user.send(_payout)) {
+      userFunds[_user] = userFunds[_user].add(_payout);
+    }
+  }
+
+/**
+* @dev Withdraw dev cut.
+*/
   function devWithdraw() public {
     uint256 funds = devFunds[msg.sender];
     require(funds > 0);
@@ -451,9 +461,9 @@ contract CryptoPhoenixes is Ownable, Pausable {
     msg.sender.transfer(funds);
   }
 
-  /**
-  * @dev Users can withdraw their accumulated dividends
-  */
+/**
+* @dev Users can withdraw their accumulated dividends
+*/
   function withdrawFunds() public {
     uint256 funds = userFunds[msg.sender];
     require(funds > 0);
@@ -461,11 +471,4 @@ contract CryptoPhoenixes is Ownable, Pausable {
     msg.sender.transfer(funds);
     WithdrewFunds(msg.sender);
   }
-
-  /**
-  * @dev In the event where something goes wrong, or a better version of the contract is created
-  */
-  function upgradeContract(address _newContract) public onlyOwner {
-        _newContract.transfer(this.balance);
-        }
 }
