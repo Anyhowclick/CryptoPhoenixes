@@ -154,7 +154,8 @@ export default class PhoenixCard extends Component {
       if (!err) {
         if (res.args._phoenixId == self.props.id) {
           let price = self.props.web3.fromWei(res.args.price,'ether').toNumber()
-          self.props.showNotification(self.props.name + " bought for " + price + " ETH","warning")
+          let newOwner = res.args.newOwner
+          self.props.showNotification(newOwner + " bought " + self.props.name + " for " + price + " ETH","warning")
           let nextPrice = self.props.web3.fromWei(res.args.nextPrice,'ether').toNumber()
           self.updatePriceDisplay(nextPrice)
           self.updateOwnerDisplay(res.args.newOwner)

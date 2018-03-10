@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap'
 import { HIGHER_PERCENTAGE_CUTOFF, HIGHER_PRICE_RESET_PERCENTAGE, LOWER_PRICE_RESET_PERCENTAGE, BASE_PRICE, CRYPTOPHOENIXES_CONTRACT_ADDR } from './Constants'
 export default class ExplosionButton extends Component {
   constructor(props) {
@@ -53,13 +53,21 @@ export default class ExplosionButton extends Component {
       return (
         <div>
         <Button color="warning" block size="lg" className="explosionText" onClick={this.toggle}>Explode Now!</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <Modal className="modal-dialog modal-lg" isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Caution</ModalHeader>
         <ModalBody>
-        You are claiming <strong className="boldModalText">{this.props.explosivePower}%</strong> from the phoenix pool. However, this phoenix 
-        will drop in price from <strong className="boldModalText">{this.props.price} ETH to {this.calculatePriceDrop()} ETH!</strong>
-        <br />
-        Do you wish to continue?
+          <Container className="explosionBenefits">
+            You are claiming <strong className="boldModalText">{this.props.explosivePower}%</strong> from the Phoenix pool.
+            <br />
+            You get 0.5% dividends from subsequent purchases of this phoenix until the next explosion.
+          </Container>
+          <Container className="explosionCosts">
+          This phoenix will drop in price from 
+          <strong className="boldModalTextLight"> {this.props.price} ETH to {this.calculatePriceDrop()} ETH!</strong>
+          </Container>
+          <Container className="explosionContinue">
+          Do you wish to continue?
+          </Container>
         </ModalBody>
         <ModalFooter>
         <Button color="danger" onClick={this.toggle}>No</Button>

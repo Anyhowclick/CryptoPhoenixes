@@ -1,6 +1,7 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Button } from 'reactstrap';
 import { CONTRACT_LINK, RIGHT_NETWORK_ID } from './Constants'
+import Discord from '../assets/Discord.png'
 
 export default class NavigationBar extends React.Component {
   constructor(props) {
@@ -81,6 +82,11 @@ export default class NavigationBar extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink href={CONTRACT_LINK} target="blank">Contract</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="https://discord.gg/YMxXeqW" target="blank">
+                <img className="discordIcon" src={Discord} />
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>

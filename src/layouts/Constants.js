@@ -5,12 +5,12 @@ export const DIVIDEND_DENOMINATOR = 10
 var Web3 = require('web3')
 
 //To change for mainnet
-export const TOTAL_PHOENIX_NUM = 7 
+export const TOTAL_PHOENIX_NUM = 8 
 const ethProvider = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io"))
 export const RIGHT_NETWORK_ID = "3" //1 = Main net, 3 = Ropsten
-export const CRYPTOPHOENIXES_CONTRACT_ADDR = "0x5B8b48606a4cd2C3B63Ade9f970EBb0a5987935e"
+export const CRYPTOPHOENIXES_CONTRACT_ADDR = "0xfd640dbe512bfcee682898869c2ffb2d13e55dca"
 export const CONTRACT_LINK = "https://ropsten.etherscan.io/address/" + CRYPTOPHOENIXES_CONTRACT_ADDR
-
+//CHANGE WRONG NETWORK NOTIFICATION MESSAGE IN NAVIGATIONBAR.JS
 
 export const CryptoPhoenixesABI = require('../../build/contracts/CryptoPhoenixes.json').abi
 const CryptoPhoenixesContract = ethProvider.eth.contract(CryptoPhoenixesABI)

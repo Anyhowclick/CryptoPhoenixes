@@ -53,11 +53,15 @@ h1, h2, h3 {
 /* NAVBAR */
 .navbar {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
-  background: rgb(235, 235, 235);
+  background: rgb(250, 236, 225);
 }
 
 .navbar a {
   color: #fff;
+}
+
+.discordIcon {
+  transform: translateY(-5%);
 }
 
 .faqTitle {
@@ -92,6 +96,39 @@ h1, h2, h3 {
   font-size: 0.8rem;
 }
 
+.modal-header {
+  background-color: #FF3E00;
+  color: white;
+}
+
+.modal-body {
+  background-color: #FFAE00;
+  padding: 0 0 5px;
+  font-size: 1.2rem;
+}
+
+.explosionBenefits {
+  background-color: #FFAE00;
+  color: black;
+  padding: 2%;
+}
+
+.explosionCosts {
+  background-color: #FF0500;
+  color: white;
+  padding: 2%;
+}
+
+.explosionContinue {
+  padding: 2%;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.modal-footer {
+  background-color: rgb(255, 100, 49);
+}
+
 .explosionText {
   margin-bottom: 5%;
   font-size: x-small;
@@ -121,6 +158,9 @@ h1, h2, h3 {
   color: red;
 }
 
+.boldModalTextLight {
+  color: #ffdd57;
+}
 /* FORMS */
 
 .pure-form {

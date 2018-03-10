@@ -10,7 +10,7 @@ export default class Home extends Component {
     return (
       <div>
       <Jumbotron className="homeTitle">
-        <h1>Crypto Phoenixes</h1>
+        <h1>CryptoPhoenixes</h1>
         <p>A strategic collectibles game</p>
       </Jumbotron>
         
