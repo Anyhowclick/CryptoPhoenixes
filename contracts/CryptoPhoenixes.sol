@@ -308,10 +308,8 @@ contract CryptoPhoenixes is Ownable, Pausable {
 */
   function purchasePhoenix(uint256 _phoenixId) whenNotPaused public payable {
     Phoenix phoenix = phoenixes[_phoenixId];
+    //Get current price of phoenix
     uint256 price = phoenix.price;
-    address previousOwner = phoenix.previousOwner;
-    address outgoingOwner = phoenix.currentOwner;
-    address incomingOwner = msg.sender;
 
     // revert checks
     require(price > 0);
@@ -319,45 +317,48 @@ contract CryptoPhoenixes is Ownable, Pausable {
     //prevent multiple subsequent purchases
     require(outgoingOwner != msg.sender);
 
+    //Get owners of phoenixes
+    address previousOwner = phoenix.previousOwner;
+    address outgoingOwner = phoenix.currentOwner;
+
+    //Define Cut variables
+    uint256 devCut;  
+    uint256 dividendsCut; 
+    uint256 previousOwnerCut;
+    uint256 phoenixPoolCut;
+    uint256 phoenixPoolPurchaseExcessCut;
+    
+    //Calculate excess
     uint256 purchaseExcess = msg.value.sub(price);
 
-    //handle boundary case where we assign previousOwner to incomingOwner
+    //handle boundary case where we assign previousOwner to the user
     if (previousOwner == address(0)) {
-        phoenix.previousOwner = incomingOwner;
+        phoenix.previousOwner = msg.sender;
     }
     
-    // Calculate pool cut for taxes.
-    
-    // 2% goes to developers
-    uint256 ownerCut = price.mul(14).div(1000); //1.4% to owner
-    uint256 subDevCut = price.mul(6).div(1000); //0.6% to subDev
-    
-    // 2.5% goes to dividends
-    uint256 dividendsCut = price.mul(25).div(1000);
-    
-    // 0.5% goes to owner of phoenix in previous exploded round
-    uint256 previousOwnerCut = price.mul(5).div(1000);
+    //Calculate cuts
+    (devCut,dividendsCut,previousOwnerCut,phoenixPoolCut) = calculateCuts(price);
 
-    // 10-12% goes to phoenix pool
-    uint256 phoenixPoolCut = calculatePhoenixPoolCut(price);
-    
     // Amount payable to old owner minus the developer's and pools' cuts.
-    uint256 outgoingOwnerCut = price.sub(ownerCut);
-    outgoingOwnerCut = outgoingOwnerCut.sub(subDevCut);
+    uint256 outgoingOwnerCut = price.sub(devCut);
     outgoingOwnerCut = outgoingOwnerCut.sub(dividendsCut);
     outgoingOwnerCut = outgoingOwnerCut.sub(previousOwnerCut);
     outgoingOwnerCut = outgoingOwnerCut.sub(phoenixPoolCut);
     
+    // Take 2% cut from leftovers of overbidding
+    phoenixPoolPurchaseExcessCut = purchaseExcess.mul(2).div(100);
+    purchaseExcess = purchaseExcess.sub(phoenixPoolPurchaseExcessCut);
+    phoenixPoolCut = phoenixPoolCut.add(phoenixPoolPurchaseExcessCut);
+
     // set new price
-    uint256 nextPrice = getNextPrice(price);
-    phoenix.price = nextPrice;
+    phoenix.price = getNextPrice(price);
 
     // set new owner
-    phoenix.currentOwner = incomingOwner;
+    phoenix.currentOwner = msg.sender;
 
     //Actual transfer
-    devFunds[owner] = devFunds[owner].add(ownerCut);
-    devFunds[subDev] = devFunds[subDev].add(subDevCut);
+    devFunds[owner] = devFunds[owner].add(devCut.mul(7).div(10)); //70% of dev cut goes to owner
+    devFunds[subDev] = devFunds[subDev].add(devCut.mul(3).div(10)); //30% goes to other dev
     distributeDividends(dividendsCut);
     userFunds[previousOwner] = userFunds[previousOwner].add(previousOwnerCut);
     PHOENIX_POOL = PHOENIX_POOL.add(phoenixPoolCut);
@@ -373,8 +374,28 @@ contract CryptoPhoenixes is Ownable, Pausable {
     }
 
     // raise event
-    PhoenixPurchased(_phoenixId, outgoingOwner, incomingOwner, price, nextPrice);
+    PhoenixPurchased(_phoenixId, outgoingOwner, msg.sender, price, phoenix.price);
   }
+
+  function calculateCuts(uint256 _price) private pure returns (
+    uint256 devCut, 
+    uint256 dividendsCut,
+    uint256 previousOwnerCut,
+    uint256 phoenixPoolCut
+    ) {
+      // Calculate cuts
+      // 2% goes to developers
+      devCut = _price.mul(2).div(100);
+
+      // 2.5% goes to dividends
+      dividendsCut = _price.mul(25).div(1000); 
+
+      // 0.5% goes to owner of phoenix in previous exploded round
+      previousOwnerCut = _price.mul(5).div(1000);
+
+      // 10-12% goes to phoenix pool
+      phoenixPoolCut = calculatePhoenixPoolCut(_price);
+    }
 
   function calculatePhoenixPoolCut (uint256 _price) private pure returns (uint256 _poolCut) {
       if (_price < QUARTER_ETH_CAP) {
