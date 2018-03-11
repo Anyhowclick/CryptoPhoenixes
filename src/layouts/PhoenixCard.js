@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Col, Progress, Button } from 'reactstrap'
-import {MAX_COOLDOWN, MAX_POWER, POWER_DENOMINATOR, DIVIDEND_DENOMINATOR} from './Constants.js'
+import {MAX_COOLDOWN, MAX_POWER, MAX_DIVIDENDS, POWER_DENOMINATOR, DIVIDEND_DENOMINATOR} from './Constants.js'
 import Countdown from 'react-countdown-now'
 import ExplosionButton from './ExplosionButton'
 import BuyButton from './BuyButton'
@@ -50,12 +50,12 @@ export default class PhoenixCard extends Component {
     switch (type) {
       case "POWER":
         return (
-          <Progress striped color="warning" value={amount/POWER_DENOMINATOR} />
+          <Progress striped color="warning" value={amount/POWER_DENOMINATOR} max={MAX_POWER}/>
         )
 
       case "DIVIDEND":
         return (
-         <Progress striped color="success" value={amount/DIVIDEND_DENOMINATOR} max={MAX_POWER}/> 
+         <Progress striped color="success" value={amount/DIVIDEND_DENOMINATOR} max={MAX_DIVIDENDS}/> 
         )
 
       case "COOLDOWN":

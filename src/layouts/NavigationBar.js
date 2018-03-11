@@ -2,6 +2,7 @@ import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Button } from 'reactstrap';
 import { CONTRACT_LINK, RIGHT_NETWORK_ID } from './Constants'
 import Discord from '../assets/Discord.png'
+import Banner from '../assets/Banner.png'
 
 export default class NavigationBar extends React.Component {
   constructor(props) {
@@ -71,11 +72,11 @@ export default class NavigationBar extends React.Component {
         <Navbar color="faded" light className="navbar-expand-lg">
         
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <NavbarBrand href="/">CryptoPhoenixes</NavbarBrand>
+          <NavbarBrand href="/"><img className="banner" src={Banner} /></NavbarBrand>
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href="/about">About</NavLink>
+                <NavLink href="/faq">FAQ</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/marketplace">Marketplace</NavLink>

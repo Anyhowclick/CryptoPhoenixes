@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import App from './App'
 import Home from './layouts/Home'
 import Market from './layouts/Market'
-import About from './layouts/About'
+import FAQ from './layouts/FAQ'
 import MetamaskGet from './layouts/MetamaskGet'
 import MetamaskLocked from './layouts/MetamaskLocked'
 
@@ -22,7 +22,7 @@ ReactDOM.render((
   <Router history={history}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
-        <Route path="/about" component={About} />
+        <Route path="/faq" component={FAQ} />
         <Route path="/marketplace" component={Market} />
         <Route path="/getMetamask" component={MetamaskGet} />
         <Route path="/unlockMetamask" component={MetamaskLocked} />

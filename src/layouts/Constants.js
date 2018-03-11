@@ -1,5 +1,6 @@
 export const MAX_COOLDOWN = 7
-export const MAX_POWER = 15
+export const MAX_DIVIDENDS = 15
+export const MAX_POWER = 80
 export const POWER_DENOMINATOR = 10 
 export const DIVIDEND_DENOMINATOR = 10
 var Web3 = require('web3')
@@ -8,7 +9,7 @@ var Web3 = require('web3')
 export const TOTAL_PHOENIX_NUM = 8 
 const ethProvider = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io"))
 export const RIGHT_NETWORK_ID = "3" //1 = Main net, 3 = Ropsten
-export const CRYPTOPHOENIXES_CONTRACT_ADDR = "0xfd640dbe512bfcee682898869c2ffb2d13e55dca"
+export const CRYPTOPHOENIXES_CONTRACT_ADDR = "0x8256b77494a695caf782a7075ff0d3e664eaec71"
 export const CONTRACT_LINK = "https://ropsten.etherscan.io/address/" + CRYPTOPHOENIXES_CONTRACT_ADDR
 //CHANGE WRONG NETWORK NOTIFICATION MESSAGE IN NAVIGATIONBAR.JS
 

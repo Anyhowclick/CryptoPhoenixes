@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Jumbotron, Container, Col, Row, Button,
   Card, CardImg, CardBody, CardTitle, CardSubtitle, Progress } from 'reactstrap'
-import {MAX_COOLDOWN, MAX_POWER} from './Constants.js'
+import {MAX_COOLDOWN, MAX_POWER, MAX_DIVIDENDS} from './Constants.js'
 import Odometer from 'react-odometerjs'
 
 
@@ -29,9 +29,9 @@ export default class Home extends Component {
         </CardSubtitle>
         <hr />
         <span>Dividend: 8%</span>
-        <Progress striped color="success" value={8} max={MAX_POWER}/> 
+        <Progress striped color="success" value={8} max={MAX_DIVIDENDS}/> 
         <span>Power: 65%</span>
-        <Progress striped color="warning" value={65} max={100} />
+        <Progress striped color="warning" value={65} max={MAX_POWER} />
         <span>Cooldown: 1 day</span>
         <Progress striped color="danger" value={1} max={MAX_COOLDOWN}/>
         <hr />

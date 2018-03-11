@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import { Container, ListGroup, ListGroupItem, Table } from 'reactstrap'
 
-class About extends Component {
+export default class FAQ extends Component {
   render() {
     return (
     <div>
         <h1 className="faqTitle">Frequently Asked Questions</h1>
         <Container>
         <ListGroup>
+            <ListGroupItem active>Am I allowed to overbid for a phoenix?</ListGroupItem>
+            <ListGroupItem>
+                Yes you are, but with a caveat. <strong className="boldText">2% of excess funds goes to the Phoenix pool.</strong>
+                The rationale for this is to make it riskier for users to buy phoenixes whose explosions are ready, and to cause
+                users to be careful with their bids.
+            </ListGroupItem> 
             <ListGroupItem active>Where does my ETH go when I purchase a phoenix?</ListGroupItem>
             <ListGroupItem>
                 The money is split 4 ways, with varying percentages depending on the price of the phoenix at the point of purchase.
@@ -115,5 +121,3 @@ class About extends Component {
     )
   }
 }
-
-export default About

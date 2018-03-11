@@ -60,6 +60,10 @@ h1, h2, h3 {
   color: #fff;
 }
 
+.banner {
+  height: 50px;
+}
+
 .discordIcon {
   transform: translateY(-5%);
 }
