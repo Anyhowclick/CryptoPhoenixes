@@ -19,9 +19,9 @@ export default class Home extends Component {
         <Row>
         <Col xs="12" sm="6" lg="4">
         <Card className="displayCard">
-        <CardImg top width="100%" src={require("../assets/Iron Man.jpg")} alt="Card image cap" />
+        <CardImg top width="100%" src={require("../assets/Everflame.jpg")} alt="Card image cap" />
         <CardBody>
-        <CardTitle className="cardTitleText">Iron Man</CardTitle>
+        <CardTitle className="cardTitleText">Everflame</CardTitle>
         <CardSubtitle className="cardSubtitleText">
         Owner: 0x12345
         <br />
@@ -42,20 +42,19 @@ export default class Home extends Component {
         </Col>
 
         <Col xs="12" sm="6" lg="8" className="attributesDescription">
-        <h2>Dividends</h2>
+        <h2 id="dividendTitle">Dividends</h2>
         <p>
-          2.5% of each phoenix sale goes to the dividends pool, which is distributed to all other phoenix card owners. This attribute determines
-          the proportion of dividends received. 0.5% goes to the owner who caused the phoenix to explode in the previous round.
+          The proportion of dividends received from the dividends pool.
         </p>
         <hr />
-        <h2>Exploding Power</h2>
+        <h2 id="powerTitle">Exploding Power</h2>
         <p>
-          10-12% of each phoenix sale goes to the Phoenix pool. This attribute determines the percentage claimable out of this pool. Trigger this
+          The percentage claimable out of the Phoenix pool. Trigger this
           claim by exploding the phoenix. Be wary though, as this will cause the price of the phoenix to
           <strong className="boldText"> drop significantly!</strong>
         </p>
         <hr />
-        <h2>Cooldown</h2>
+        <h2 id="cooldownTitle">Cooldown</h2>
         <p>
           After each explosion, the phoenix will rise from its ashes and grow again. This attribute determines how long it takes before it is
           ready for the next explosion.

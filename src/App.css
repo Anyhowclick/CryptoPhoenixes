@@ -50,6 +50,18 @@ h1, h2, h3 {
   padding: 6%;
 }
 
+#dividendTitle {
+  color: #28a745;
+}
+
+#powerTitle {
+  color: #ffc107;
+}
+
+#cooldownTitle {
+  color: #dc3545;
+}
+
 /* NAVBAR */
 .navbar {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
