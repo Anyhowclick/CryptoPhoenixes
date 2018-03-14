@@ -49,8 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Notifications />
-        <NavigationBar network={this.state.currNetwork} account={this.state.currAccount}/>
+        
         {this.props.children}
         <hr />
         <Footer />
