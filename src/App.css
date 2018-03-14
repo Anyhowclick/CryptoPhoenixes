@@ -27,6 +27,7 @@ h1, h2, h3 {
 
 .homeTitle {
   color: rgb(255, 120, 71);
+  font-size: 3rem;
 }
 
 .homeTitle h1 {
@@ -48,6 +49,12 @@ h1, h2, h3 {
 
 .attributesDescription {
   padding: 6%;
+}
+
+#phoenixAttTtitle {
+  font-size: 2.5rem;
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  color: #62aeff;
 }
 
 #dividendTitle {

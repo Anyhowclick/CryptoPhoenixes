@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Jumbotron, Container, Col, Row, Button,
   Card, CardImg, CardBody, CardTitle, CardSubtitle, Progress } from 'reactstrap'
 import {MAX_COOLDOWN, MAX_POWER, MAX_DIVIDENDS} from './Constants.js'
+import Countdown from 'react-countdown-now'
 
 export default class Home extends Component {
   render() {
@@ -9,10 +10,14 @@ export default class Home extends Component {
       <div>
       <Jumbotron className="homeTitle">
         <h1>CryptoPhoenixes</h1>
-        <p>A strategic collectibles game</p>
+        <h2>Mainnet Launch in:</h2>
+        <Countdown
+        date={1521252000000}
+        />
       </Jumbotron>
         
         <Jumbotron className="homeDescription">
+        <span id="phoenixAttTtitle">Phoenix attributes</span>
         <Container>
         <Row>
         <Col xs="12" sm="6" lg="4">
