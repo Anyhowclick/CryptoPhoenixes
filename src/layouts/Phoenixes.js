@@ -6,6 +6,7 @@ import UserFundButton from './UserFundButton'
 import { notify } from 'react-notify-toast'
 import Odometer from 'react-odometerjs';
 import settings from '../phoenixes.json'
+import Danger from '../assets/danger.png'
 
 export default class Phoenixes extends Component {
   constructor(props) {
@@ -184,6 +185,7 @@ export default class Phoenixes extends Component {
         web3={this.props.web3}
         CryptoPhoenixes={this.props.CryptoPhoenixes} />
         </Jumbotron>
+        <p id="overpayCautionText"><img src={Danger} /> Note: While overpaying is allowed, 2% of excess funds go into the Phoenix pool! <img src={Danger} /></p>
       <Container>
         <Row>
         {this.renderChildren(this.state.PHOENIXES)}

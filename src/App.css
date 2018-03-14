@@ -41,6 +41,17 @@ h1, h2, h3 {
 .homeDescription {
   color: white;
   padding: 2%;
+  margin-bottom: 0;
+}
+
+#overpayCautionText {
+  font-size: 1.3rem;
+  background-color: rgb(255, 0, 0);
+  color: white;
+}
+
+#overpayCautionText img {
+  height: 1.8em;
 }
 
 .displayCard {
