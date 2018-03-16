@@ -34,7 +34,7 @@ contract Pausable is Ownable {
   event Pause();
   event Unpause();
 
-  bool public paused = false;
+  bool public paused = true;
 
 
   /**

@@ -82,7 +82,7 @@ export default class NavigationBar extends React.Component {
                 <NavLink href="/marketplace">Marketplace</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href={CONTRACT_LINK} target="blank">Contract</NavLink>
+                <NavLink href="https://etherscan.io/address/0xfd640dbe512bfcee682898869c2ffb2d13e55dca#code" target="blank">Mainnet Contract</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://discord.gg/YMxXeqW" target="blank">
