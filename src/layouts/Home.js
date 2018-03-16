@@ -12,7 +12,7 @@ export default class Home extends Component {
         <h1>CryptoPhoenixes</h1>
         <h2>Mainnet Launch in:</h2>
         <Countdown
-        date={1521252000000}
+        date={1521298800000}
         />
       </Jumbotron>
         
