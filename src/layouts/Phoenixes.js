@@ -186,7 +186,7 @@ export default class Phoenixes extends Component {
         CryptoPhoenixes={this.props.CryptoPhoenixes} />
         </Jumbotron>
         <p id="overpayCautionText"><img src={Danger} /> Note: While overpaying is allowed, 2% of excess funds go into the Phoenix pool! <img src={Danger} /></p>
-      <Container>
+      <Container fluid={true} className="phoenixesContainer">
         <Row>
         {this.renderChildren(this.state.PHOENIXES)}
         </Row>

@@ -14,7 +14,9 @@ body,
 body {
   margin: 0 0 30px;
   background-image: url('./assets/BG.jpg');
-  background-size: 100%;
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 h1, h2, h3 {
@@ -115,6 +117,13 @@ h1, h2, h3 {
   background-color: orangered;
   border-color: orangered;
   font-size: 1.2em;
+}
+
+.phoenixesContainer {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
 }
 
 .card {
