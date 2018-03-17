@@ -14,6 +14,7 @@ export default class Home extends Component {
         <Countdown
         date={1521298800000}
         />
+        <p>Game launch will be shortly after that of floatingtowers.com</p>
       </Jumbotron>
         
         <Jumbotron className="homeDescription">
