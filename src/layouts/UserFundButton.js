@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
 import { CRYPTOPHOENIXES_CONTRACT_ADDR } from './Constants'
-import MetamaskGet from './MetamaskGet'
 
 export default class UserFundButton extends Component {
   constructor(props) {
     super(props)
-    this.withdrawDividends = this.withdrawDividends.bind(this);
+    this.withdrawFunds = this.withdrawFunds.bind(this);
   }
 
-  async withdrawDividends() {
+  async withdrawFunds() {
     let self = this
-    let data = this.props.CryptoPhoenixes.withdrawDividends.getData()
+    let data = this.props.CryptoPhoenixes.withdrawFunds.getData()
     await this.props.web3.eth.sendTransaction({
       data: data,
       from: this.props.web3.eth.accounts[0],
@@ -31,7 +30,7 @@ export default class UserFundButton extends Component {
       return (<Button color="warning" size="lg" className="claimFundButton" href="/unlockMetamask">Unlock Metamask</Button>)
     } else {
       return (
-        <Button color="success" size="lg" className="claimFundButton" onClick={this.withdrawDividends}>Collect Funds: {this.props.userFunds} ETH</Button>
+        <Button color="success" size="lg" className="claimFundButton" onClick={this.withdrawFunds}>Collect Funds: {this.props.userFunds} ETH</Button>
         )
     }
   }

@@ -59,7 +59,7 @@ export default class NavigationBar extends React.Component {
       <Navbar className="wrongNetworkBar">
         <Nav navbar>
         <NavItem>
-          Wrong Network Detected. Kindly switch to Ropsten.
+          Wrong Network Detected. Kindly switch to the mainnet.
         </NavItem>
         </Nav>
       </Navbar>
@@ -82,7 +82,7 @@ export default class NavigationBar extends React.Component {
                 <NavLink href="/marketplace">Marketplace</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://etherscan.io/address/0xfd640dbe512bfcee682898869c2ffb2d13e55dca#code" target="blank">Mainnet Contract</NavLink>
+                <NavLink href={CONTRACT_LINK} target="blank">Contract Source</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://discord.gg/YMxXeqW" target="blank">

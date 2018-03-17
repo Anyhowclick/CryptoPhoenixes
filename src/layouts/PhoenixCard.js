@@ -67,23 +67,26 @@ export default class PhoenixCard extends Component {
   getCooldownValue(amount) {
     switch(amount) {
       case 15:
-        return 7
+        return 8
       
       case 30:
-        return 6
+        return 7
 
       case 60:
-        return 5
+        return 6
 
       case 180:
-        return 4
+        return 5
 
       case 360:
-        return 3
+        return 4
 
       case 720:
-        return 2
+        return 3
       
+      case 1440:
+        return 2
+
       default:
         return 1
     }
@@ -109,8 +112,11 @@ export default class PhoenixCard extends Component {
       case 720:
         return "12 hrs"
       
-      default:
+      case 1440:
         return "1 day"
+
+      default:
+        return "2 days"
     }
   }
 

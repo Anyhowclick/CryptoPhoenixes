@@ -10,10 +10,6 @@ export default class Home extends Component {
       <div>
       <Jumbotron className="homeTitle">
         <h1>CryptoPhoenixes</h1>
-        <h2>Mainnet Launch in:</h2>
-        <Countdown
-        date={1521252000000}
-        />
       </Jumbotron>
         
         <Jumbotron className="homeDescription">

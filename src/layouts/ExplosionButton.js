@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container } from 'reactstrap'
 import { HIGHER_PERCENTAGE_CUTOFF, HIGHER_PRICE_RESET_PERCENTAGE, LOWER_PRICE_RESET_PERCENTAGE, BASE_PRICE, CRYPTOPHOENIXES_CONTRACT_ADDR } from './Constants'
 export default class ExplosionButton extends Component {
   constructor(props) {
