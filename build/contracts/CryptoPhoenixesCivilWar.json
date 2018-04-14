@@ -1,19 +1,15 @@
 {
-  "contractName": "CryptoPhoenixes",
+  "contractName": "CryptoPhoenixesCivilWar",
   "abi": [
     {
-      "constant": false,
-      "inputs": [],
-      "name": "closeBeta",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "constant": true,
-      "inputs": [],
-      "name": "EXPLOSION_DENOMINATOR",
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "SCORES",
       "outputs": [
         {
           "name": "",
@@ -22,28 +18,6 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_payoutPercentages",
-          "type": "uint256[]"
-        },
-        {
-          "name": "_explosivePowers",
-          "type": "uint256[]"
-        },
-        {
-          "name": "_cooldowns",
-          "type": "uint256[]"
-        }
-      ],
-      "name": "createMultiplePhoenixes",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -59,71 +33,6 @@
       "constant": false,
       "inputs": [],
       "name": "unpause",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "_phoenixId",
-          "type": "uint256"
-        }
-      ],
-      "name": "getPhoenix",
-      "outputs": [
-        {
-          "name": "price",
-          "type": "uint256"
-        },
-        {
-          "name": "nextPrice",
-          "type": "uint256"
-        },
-        {
-          "name": "dividendPayout",
-          "type": "uint256"
-        },
-        {
-          "name": "effectivePayout",
-          "type": "uint256"
-        },
-        {
-          "name": "explosivePower",
-          "type": "uint256"
-        },
-        {
-          "name": "cooldown",
-          "type": "uint256"
-        },
-        {
-          "name": "nextExplosionTime",
-          "type": "uint256"
-        },
-        {
-          "name": "previousOwner",
-          "type": "address"
-        },
-        {
-          "name": "currentOwner",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_percentage",
-          "type": "uint256"
-        }
-      ],
-      "name": "setLowerPricePercentage",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -147,43 +56,34 @@
       "constant": false,
       "inputs": [
         {
-          "name": "_phoenixId",
-          "type": "uint256"
-        },
-        {
-          "name": "_payoutPercentage",
+          "name": "_phoenixID",
           "type": "uint256"
         }
       ],
-      "name": "setDividendPayout",
+      "name": "useAbility",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
-      "constant": true,
+      "constant": false,
       "inputs": [],
-      "name": "HIGHER_PRICE_RESET_PERCENTAGE",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "name": "endGame",
+      "outputs": [],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "constant": false,
       "inputs": [
         {
-          "name": "_price",
+          "name": "_captainID",
           "type": "uint256"
         }
       ],
-      "name": "setPriceCutoff",
+      "name": "useCaptainAbility",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -206,38 +106,6 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_phoenixId",
-          "type": "uint256"
-        }
-      ],
-      "name": "explodePhoenix",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_phoenixId",
-          "type": "uint256"
-        },
-        {
-          "name": "_explosivePower",
-          "type": "uint256"
-        }
-      ],
-      "name": "setExplosivePower",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -271,6 +139,20 @@
     {
       "constant": true,
       "inputs": [],
+      "name": "subDevOne",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
       "name": "owner",
       "outputs": [
         {
@@ -283,22 +165,91 @@
       "type": "function"
     },
     {
-      "constant": false,
-      "inputs": [
+      "constant": true,
+      "inputs": [],
+      "name": "DENOMINATOR",
+      "outputs": [
         {
-          "name": "_payoutPercentage",
-          "type": "uint256"
-        },
-        {
-          "name": "_explosivePower",
-          "type": "uint256"
-        },
-        {
-          "name": "_cooldown",
+          "name": "",
           "type": "uint256"
         }
       ],
-      "name": "createPhoenix",
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "PHOENIXES",
+      "outputs": [
+        {
+          "name": "price",
+          "type": "uint256"
+        },
+        {
+          "name": "payoutPercentage",
+          "type": "uint256"
+        },
+        {
+          "name": "abilityAvailTime",
+          "type": "uint256"
+        },
+        {
+          "name": "cooldown",
+          "type": "uint256"
+        },
+        {
+          "name": "cooldownDecreaseAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "basePower",
+          "type": "uint256"
+        },
+        {
+          "name": "currentPower",
+          "type": "uint256"
+        },
+        {
+          "name": "powerIncreaseAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "powerDrop",
+          "type": "uint256"
+        },
+        {
+          "name": "powerCap",
+          "type": "uint256"
+        },
+        {
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "name": "currentOwner",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_owners",
+          "type": "address[19]"
+        }
+      ],
+      "name": "setPhoenixOwners",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -308,7 +259,7 @@
       "constant": false,
       "inputs": [
         {
-          "name": "_phoenixId",
+          "name": "_phoenixID",
           "type": "uint256"
         }
       ],
@@ -319,35 +270,36 @@
       "type": "function"
     },
     {
-      "constant": false,
-      "inputs": [
+      "constant": true,
+      "inputs": [],
+      "name": "GAME_STARTED",
+      "outputs": [
         {
-          "name": "_phoenixId",
-          "type": "uint256"
-        },
-        {
-          "name": "_cooldown",
-          "type": "uint256"
+          "name": "",
+          "type": "bool"
         }
       ],
-      "name": "setCooldown",
-      "outputs": [],
       "payable": false,
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
-      "constant": false,
+      "constant": true,
       "inputs": [
         {
-          "name": "_percentage",
+          "name": "",
           "type": "uint256"
         }
       ],
-      "name": "setHigherPricePercentage",
-      "outputs": [],
+      "name": "POOLS",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "payable": false,
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -360,23 +312,18 @@
       "type": "function"
     },
     {
-      "constant": true,
+      "constant": false,
       "inputs": [],
-      "name": "PHOENIX_POOL",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "name": "startGame",
+      "outputs": [],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "constant": true,
       "inputs": [],
-      "name": "LOWER_PRICE_RESET_PERCENTAGE",
+      "name": "GAME_END",
       "outputs": [
         {
           "name": "",
@@ -391,28 +338,14 @@
       "constant": false,
       "inputs": [
         {
-          "name": "_amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "setBasePrice",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "subDev",
-      "outputs": [
-        {
-          "name": "",
+          "name": "_newContract",
           "type": "address"
         }
       ],
+      "name": "upgradeContract",
+      "outputs": [],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -423,20 +356,6 @@
         {
           "name": "",
           "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "ALLOW_BETA",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
         }
       ],
       "payable": false,
@@ -458,9 +377,27 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "subDevTwo",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
-          "name": "_subDev",
+          "name": "_subDevOne",
+          "type": "address"
+        },
+        {
+          "name": "_subDevTwo",
           "type": "address"
         }
       ],
@@ -470,16 +407,17 @@
     },
     {
       "anonymous": false,
+      "inputs": [],
+      "name": "GameStarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
       "inputs": [
         {
           "indexed": false,
-          "name": "_phoenixId",
+          "name": "phoenixID",
           "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "oldOwner",
-          "type": "address"
         },
         {
           "indexed": false,
@@ -495,6 +433,16 @@
           "indexed": false,
           "name": "nextPrice",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "currentPower",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "abilityAvailTime",
+          "type": "uint256"
         }
       ],
       "name": "PhoenixPurchased",
@@ -505,13 +453,20 @@
       "inputs": [
         {
           "indexed": false,
-          "name": "phoenixId",
+          "name": "captainID",
           "type": "uint256"
-        },
+        }
+      ],
+      "name": "CaptainAbilityUsed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
         {
           "indexed": false,
-          "name": "owner",
-          "type": "address"
+          "name": "phoenixID",
+          "type": "uint256"
         },
         {
           "indexed": false,
@@ -525,11 +480,27 @@
         },
         {
           "indexed": false,
-          "name": "nextExplosionTime",
+          "name": "currentPower",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "abilityAvailTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "previousOwner",
+          "type": "address"
         }
       ],
-      "name": "PhoenixExploded",
+      "name": "PhoenixAbilityUsed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "GameEnded",
       "type": "event"
     },
     {
