@@ -59,7 +59,7 @@ export default class NavigationBar extends React.Component {
       <Navbar className="wrongNetworkBar">
         <Nav navbar>
         <NavItem>
-          Wrong Network Detected. Kindly switch to the mainnet.
+          Wrong Network Detected. Kindly switch to the Rinkeby testnet.
         </NavItem>
         </Nav>
       </Navbar>
@@ -79,7 +79,10 @@ export default class NavigationBar extends React.Component {
                 <NavLink href="/faq">FAQ</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/marketplace">Marketplace</NavLink>
+                <NavLink href="/battlefield">Battlefield</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/myPhoenixes">My Phoenixes</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href={CONTRACT_LINK} target="blank">Contract Source</NavLink>

@@ -1,19 +1,19 @@
 
   {
     "0":{
-      "name": "Steel"
+      "name": "Rainbow"
     },
 
     "1":{
-      "name": "Sapphire"
+      "name": "Magma"
     },
 
     "2":{
-      "name": "Reaper"
+      "name": "Aqua"
     },
 
     "3":{
-      "name": "Blizzard"
+      "name": "Akuma"
     },
 
     "4":{
@@ -21,19 +21,19 @@
     },
 
     "5":{
-      "name": "Akuma"
+      "name": "Celestial"
     },
 
     "6":{
-      "name": "Shadow"
+      "name": "Everflame"
     },
 
     "7":{
-      "name": "Tarkan"
+      "name": "Onyx"
     },
 
     "8":{
-      "name": "Shock"
+      "name": "Lucent"
     },
 
     "9":{
@@ -41,11 +41,11 @@
     },
 
     "10":{
-      "name": "Emerald"
+      "name": "Shadow"
     },
 
     "11":{
-      "name": "Onyx"
+      "name": "Blizzard"
     },
 
     "12":{
@@ -53,38 +53,26 @@
     },
 
     "13":{
-      "name": "Lucent"
+      "name": "Shock"
     },
 
     "14":{
-      "name": "Grove"
+      "name": "Sapphire"
     },
 
     "15":{
-      "name": "Celestial"
+      "name": "Tarkan"
     },
 
     "16":{
-      "name": "Magma"
+      "name": "Reaper"
     },
 
     "17":{
-      "name": "Aqua"
-    },
-
-    "18":{
       "name": "Swift"
     },
 
-    "19":{
+    "18":{
       "name": "Aura"
-    },
-
-    "20":{
-      "name": "Everflame"
-    },
-
-    "21":{
-      "name": "Rainbow"
     }
   }

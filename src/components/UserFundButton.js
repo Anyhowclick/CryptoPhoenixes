@@ -18,14 +18,15 @@ export default class UserFundButton extends Component {
     }, 
     (err,res) => {
       if(!err) {
-        self.props.showNotification("Transaction Sent!","success")
+        console.log("Transaction Sent!")
       } else {
-        self.props.showNotification("Transaction rejected", "error")
+        console.log("Transaction rejected")
       }
     })
   }
 
   render() {
+    if(!this.props.web3) { return null }
     if (this.props.userFunds == -1) {
       return (<Button color="warning" size="lg" className="claimFundButton" href="/unlockMetamask">Unlock Metamask</Button>)
     } else {

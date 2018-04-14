@@ -1,56 +1,45 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Notifications from 'react-notify-toast'
-import NavigationBar from './layouts/NavigationBar'
-import Footer from './layouts/Footer'
-import getWeb3 from './util/web3/getWeb3'
+import NavigationBar from './components/NavigationBar'
+import Footer from './components/Footer'
+import { fetchWeb3 } from './actions/web3Actions'
 
 // Styles
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
+import 'react-progress-bar-plus/lib/progress-bar.css'
 import './App.css'
-import "./css/odometerCar.css"
+
+const mapStateToProps = (state) => ({
+  web3: state.web3Status.web3,
+  currNetwork: state.web3Status.currNetwork,
+  currAccount: state.web3Status.currAccount,
+  truncatedAccount: state.web3Status.truncatedAccount
+  })
 
 class App extends Component {
   constructor(props) {
     super(props)
-    
-    this.state = {
-      currNetwork: -1,
-      currAccount: ''
-    }
+    this.fetchWeb3 = this.fetchWeb3.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     setInterval(
-      () => this.updateWeb3Status(), 1500
+      () => this.fetchWeb3(), 3000
     )
   }
 
-  async updateWeb3Status() {
-    let results = await getWeb3;
-
-    if (results.web3) {
-      if ((this.state.currNetwork !== results.web3.version.network) && results.web3.version.network) {
-        this.setState({ currNetwork: results.web3.version.network })
-      }
-
-      if (results.web3.eth.accounts[0]) {
-        let account = results.web3.eth.accounts[0].slice(0,10)
-        this.setState({ currAccount: account })
-      } else {
-        this.setState({ currAccount: '' })
-      } 
-    } else {
-      this.setState({ currNetwork: 0})
-    }
+  fetchWeb3() {
+    this.props.dispatch(fetchWeb3(this.props))
   }
 
   render() {
     return (
       <div className="App">
         <Notifications />
-        <NavigationBar network={this.state.currNetwork} account={this.state.currAccount}/>
+        <NavigationBar network={this.props.currNetwork} account={this.props.truncatedAccount}/>
         {this.props.children}
         <hr />
         <Footer />
@@ -59,4 +48,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(mapStateToProps)(App)

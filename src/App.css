@@ -6,44 +6,80 @@ html {
 
 body,
 .pure-g [class*=pure-u] {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
   text-align: center;
   height: 100%;
 }
 
 body {
   margin: 0 0 30px;
-  background-image: url('./assets/BG.jpg');
+  background-image: url('./assets/newBG.jpg');
   background-repeat: repeat-y;
   background-size: cover;
   background-attachment: fixed;
+  color: white;
+}
+
+img {
+  max-width: 100%;
 }
 
 h1, h2, h3 {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
 
+.redTeamBG {
+  background-color: #8a4347
+}
+
+.blueTeamBG {
+  background-color: #47545c
+}
+
+.redTeamAbility {
+  background-color: #FF0000;
+  border-color: #FF0000;
+}
+
+.blueTeamAbility {
+  background-color: blue;
+  border-color: blue;
+}
+
+.popoverRed {
+  background-color: #E31600;
+  border-color: #E31600;
+}
+
+.popoverBlue {
+  background-color: deepskyblue;
+  border-color: deepskyblue;
+}
+
+.rainbow {
+  background: red;
+  background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+  background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+  background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.redFont {
+  color: #ff898a;
+}
+
+.blueFont {
+  color: #88e8ff;
+}
+
 .jumbotron {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.homeTitle {
-  color: rgb(255, 120, 71);
-  font-size: 3rem;
-}
-
-.homeTitle h1 {
-  font-size: 4rem;
-}
-
-.homeTitle p {
-  font-size: 1rem;
-}
-
-.homeDescription {
-  color: white;
-  padding: 2%;
-  margin-bottom: 0;
+.homeTitle img {
+  max-width: 70%;
 }
 
 #overpayCautionText {
@@ -64,28 +100,24 @@ h1, h2, h3 {
   padding: 6%;
 }
 
+.loadingScreen {
+  font-size: 3rem;
+  min-height: 12rem;
+}
+
 #phoenixAttTtitle {
   font-size: 2.5rem;
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
   color: #62aeff;
 }
 
-#dividendTitle {
-  color: #28a745;
-}
-
-#powerTitle {
-  color: #ffc107;
-}
-
-#cooldownTitle {
-  color: #dc3545;
-}
-
 /* NAVBAR */
 .navbar {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
   background: rgb(250, 236, 225);
+  z-index: 1;
+  top: 0;
+  max-width: 100%;
 }
 
 .navbar a {
@@ -109,8 +141,8 @@ h1, h2, h3 {
 }
 
 .list-group-item {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
 }
 
 .list-group-item.active {
@@ -119,8 +151,29 @@ h1, h2, h3 {
   font-size: 1.2em;
 }
 
+.gameStats {
+  margin-bottom: 0;
+}
+
+.gameDuration {
+  font-size: 1.5rem;
+}
+
+#gameCountdownTimer {
+  font-size: 3rem;
+}
+
+#gameScores {
+  font-size: 4rem;
+}
+
+.poolAmt {
+  font-size: 2rem;
+}
+
 .phoenixesContainer {
   background-color: rgba(0, 0, 0, 0.7);
+  min-height: 12rem;
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 2%;
@@ -139,26 +192,35 @@ h1, h2, h3 {
   font-size: 0.8rem;
 }
 
+.react-progress-bar {
+  position: inherit;
+  background: #684154;
+}
+
+.react-progress-bar-percent {
+  background: #de00ff;
+  box-shadow: none;
+}
+
 .modal-header {
-  background-color: #FF3E00;
-  color: white;
+  background-color: #FFAE00;
 }
 
 .modal-body {
-  background-color: #FFAE00;
+  background-color: rgb(255, 100, 49);
   padding: 0 0 5px;
   font-size: 1.2rem;
 }
 
 .explosionBenefits {
-  background-color: #FFAE00;
+  background-color: rgb(255, 100, 49);
   color: black;
   padding: 2%;
 }
 
 .explosionCosts {
-  background-color: #FF0500;
-  color: white;
+  background-color: rgb(255, 100, 49);
+  color: black;
   padding: 2%;
 }
 
@@ -169,12 +231,39 @@ h1, h2, h3 {
 }
 
 .modal-footer {
-  background-color: rgb(255, 100, 49);
+  background-color: #FFAE00;
 }
 
 .explosionText {
   margin-bottom: 5%;
-  font-size: x-small;
+  font-size: small;
+}
+
+.descriptIcons {
+  margin-top: 4%;
+  margin-bottom: 2%;
+}
+
+.descriptIconsRed {
+  background-color: #BF6963;
+  border-color: #BF6963;
+  font-size: 0.7rem;
+}
+
+.descriptIconsBlue {
+  background-color: #858FC7;
+  border-color: #858FC7;
+  font-size: 0.7rem;
+}
+
+.descriptImg {
+  max-width: 50%;
+  margin-right: .1rem;
+}
+
+.countdownButtonText {
+  margin-bottom: 5%;
+  font-size: small;
 }
 
 .metamaskButton {
@@ -190,24 +279,16 @@ h1, h2, h3 {
 }
 
 .wrongNetworkBar {
-  background-color: #ffdd57
+  background-color: #ffdd57;
+  color: black;
 }
 
 .boldText {
-  color: #ffdd57;
-}
-
-.boldModalText {
   color: red;
 }
 
-.boldModalTextLight {
+.boldModalText {
   color: #ffdd57;
-}
-/* FORMS */
-
-.pure-form {
-  display: inline-block;
 }
 
 #loadingContainer {
@@ -227,8 +308,73 @@ h1, h2, h3 {
   background-color: rgba(255,0,0,0.5);
 }
 
-@media all and (max-width: 768px) {
-  .homeTitle h1 {
-    font-size: 2.5rem;
+@media all and (max-width: 500px) {
+  .body {
+    font-size: .5rem;
+  }
+
+  hr {
+    margin: .3rem;
+  }
+  
+  .loadingScreen {
+    font-size: 2rem;
+  }
+
+  .gameDuration {
+    font-size: .7rem;
+  }
+
+  #gameCountdownTimer {
+    font-size: 1.5rem;
+  }
+  
+  #gameScores {
+    font-size: 2rem;
+  }
+
+  .poolAmt {
+    font-size: 1rem;
+  }
+
+  #overpayCautionText, .claimFundButton {
+    font-size: .7rem;
+  }
+
+  #overpayCautionText img {
+    height: 1em;
+  }
+
+  .card {
+    font-size: 0.5rem;
+    margin-bottom: 5%;
+  }
+
+  .card-body {
+    padding: .5rem;
+  }
+
+  .cardTitleText {
+    font-size: 0.8rem;
+  }
+  
+  .cardSubtitleText {
+    font-size: 0.6rem;
+  }
+
+  .descriptIconsRed {
+    font-size: 0.5rem;
+  }
+  
+  .descriptIconsBlue {
+    font-size: 0.5rem;
+  }
+  
+  .pauseButton {
+    font-size: 0.5rem;
+  }
+
+  .footer {
+    font-size: 0.7rem;
   }
 }
