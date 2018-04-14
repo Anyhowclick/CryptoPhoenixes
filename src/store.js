@@ -15,8 +15,7 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(
       thunkMiddleware,
-      routingMiddleware,
-      logger
+      routingMiddleware
     )
   )
 )
