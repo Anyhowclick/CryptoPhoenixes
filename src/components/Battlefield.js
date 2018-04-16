@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactGA from 'react-ga'
 import { connect } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import { Jumbotron, Container } from 'reactstrap'
@@ -32,10 +33,15 @@ class Battlefield extends Component {
     this.gameEndNotif = this.gameEndNotif.bind(this)
     this.gameStartNotif = this.gameStartNotif.bind(this)
   }
+  
+  componentDidMount() {
+    ReactGA.initialize('UA-117401803-1')
+    ReactGA.pageview(window.location.pathname + window.location.search)
+  }
 
   componentWillUpdate(nextProps) {
     if(nextProps.web3 != this.props.web3) {
-      this.props.dispatch(fetchGame())
+      this.props.dispatch(fetchGame(nextProps.contract))
       let self = this,
       GameStartEvent = nextProps.contract.GameStarted(),
       GameEndEvent = nextProps.contract.GameEnded()

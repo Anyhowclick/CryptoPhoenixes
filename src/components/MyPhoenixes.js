@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import { Jumbotron, Container, Button, Row, Col } from 'reactstrap'
 import { InfuraCryptoPhoenixes, RIGHT_NETWORK_ID } from './Constants'
-import { getGameDuration, fetchPhoenix } from '../actions/gameActions'
+import { fetchPhoenix } from '../actions/gameActions'
 import RainbowPhoenix from './RainbowPhoenix'
 import Captain from './Captain'
 import Phoenix from './Phoenix'
@@ -44,7 +44,6 @@ class MyPhoenixes extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.contract != nextProps.contract) {
-      this.props.dispatch(getGameDuration())
       this.fetchAllPhoenixes(nextProps.contract)
       let self = this,
       PurchaseEvent = nextProps.contract.PhoenixPurchased({fromBlock:'latest'}),

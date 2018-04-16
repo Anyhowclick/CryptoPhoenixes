@@ -1,29 +1,89 @@
 import { ethProvider, InfuraCryptoPhoenixes } from '../components/Constants'
 import settings from '../phoenixes.json'
 
-export function fetchGame() {
+export function fetchGame(contract) {
   return async function(dispatch) {
-    let GAME_STARTED = InfuraCryptoPhoenixes.GAME_STARTED(),
-    GAME_END = InfuraCryptoPhoenixes.GAME_END().toNumber(),
-    RED_POOL = ethProvider.fromWei(InfuraCryptoPhoenixes.POOLS(0),'ether').toNumber().toFixed(5),
-    BLUE_POOL = ethProvider.fromWei(InfuraCryptoPhoenixes.POOLS(1),'ether').toNumber().toFixed(5),
-    RED_SCORE = (ethProvider.fromWei(InfuraCryptoPhoenixes.SCORES(0),'finney').toNumber()*100).toFixed(),
-    BLUE_SCORE = (ethProvider.fromWei(InfuraCryptoPhoenixes.SCORES(1),'finney').toNumber()*100).toFixed()
+    /*HELPER FUNCTIONS*/
+    function procGameStart(err,res) {
+      if(!err) {
+        updateGameStart(res)
+      } else {
+        console.log(err)
+      }
+    }
 
-    dispatch({type: "GAME_DURATION_UPDATED", payload: [GAME_STARTED,GAME_END]})
-    dispatch({type: "RED_POOL_UPDATED", payload: RED_POOL})
-    dispatch({type: "BLUE_POOL_UPDATED", payload: BLUE_POOL})
-    dispatch({type: "RED_SCORE_UPDATED", payload: RED_SCORE})
-    dispatch({type: "BLUE_SCORE_UPDATED", payload: BLUE_SCORE})
+    var updateGameStart = function(res) {
+      dispatch({type: "GAME_START_UPDATED", payload: res})
+    }
+
+    function procGameEnd(err,res) {
+      if(!err) {
+        updateGameEnd(res.toNumber())
+      } else {
+        console.log(err)
+      }
+    }
+
+    var updateGameEnd = function(res) {
+      dispatch({type: "GAME_END_UPDATED", payload: res})
+    }
+
+    function procRedPool(err,res) {
+      if(!err) {
+        updateRedPool(ethProvider.fromWei(res,'ether').toNumber().toFixed(6))
+      } else {
+        console.log(err)
+      }
+    }
+    
+    var updateRedPool = function(res) {
+      dispatch({type: "RED_POOL_UPDATED", payload: res})
+    }
+
+    function procBluePool(err,res) {
+      if(!err) {
+        updateBluePool(ethProvider.fromWei(res,'ether').toNumber().toFixed(6))
+      } else {
+        console.log(err)
+      }
+    }
+
+    var updateBluePool = function(res) {
+      dispatch({type: "BLUE_POOL_UPDATED",payload: res})
+    }
+
+    function procRedScore(err,res) {
+      if(!err) {
+        updateRedScore(ethProvider.fromWei(res,'finney').toNumber().toFixed(1)*100)
+      } else {
+        console.log(err)
+      }
+    }
+
+    var updateRedScore = function(res) {
+      dispatch({type: "RED_SCORE_UPDATED", payload: res})
+    }
+
+    function procBlueScore(err,res) {
+      if(!err) {
+        updateBlueScore(ethProvider.fromWei(res,'finney').toNumber().toFixed(1)*100)
+      } else {
+        console.log(err)
+      }
+    }
+
+    var updateBlueScore = function(res) {
+      dispatch({type: "BLUE_SCORE_UPDATED",payload: res})
+    }
+
+
+    await contract.GAME_STARTED(procGameStart)
+    await contract.GAME_END(procGameEnd)
+    await contract.POOLS(0,procRedPool)
+    await contract.POOLS(1,procBluePool)
+    await contract.SCORES(0,procRedScore)
+    await contract.SCORES(1,procBlueScore)
     dispatch({type: "GAME_STATS_FETCHED"}) 
-  }
-}
-
-export function getGameDuration() {
-  return async function(dispatch) {
-    let GAME_STARTED = InfuraCryptoPhoenixes.GAME_STARTED(),
-    GAME_END = InfuraCryptoPhoenixes.GAME_END().toNumber()
-    dispatch({type: "GAME_DURATION_UPDATED", payload: [GAME_STARTED,GAME_END]})
   }
 }
 

@@ -53,13 +53,17 @@ export default function reducer(state={
                 }
             }
 
-            case "GAME_DURATION_UPDATED": {
-                let now = new Date().getTime(),
-                [GAME_STARTED,GAME_END] = action.payload
+            case "GAME_START_UPDATED": {
                 return {
                     ...state,
-                    gameInProgress: GAME_STARTED,
-                    gameEnd: GAME_END
+                    gameInProgress: action.payload
+                }
+            }
+
+            case "GAME_END_UPDATED": {
+                return {
+                    ...state,
+                    gameEnd: action.payload
                 }
             }
 

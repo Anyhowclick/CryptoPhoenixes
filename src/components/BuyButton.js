@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactGA from 'react-ga'
 import { Button, InputGroup, Input } from 'reactstrap'
 import { CRYPTOPHOENIXES_CONTRACT_ADDR, RIGHT_NETWORK_ID } from './Constants'
 import { toast } from 'react-toastify'
@@ -22,8 +21,6 @@ export default class BuyButton extends Component {
   }
 
   componentWillMount() {
-    ReactGA.initialize('UA-117401803-1')
-    ReactGA.pageview(window.location.pathname + window.location.search)
     if(this.props.gameEnd != -1) {
       let time = new Date().getTime()
       time = Math.max(0,parseInt(this.props.gameEnd*1000)-parseInt(time))
@@ -74,13 +71,6 @@ export default class BuyButton extends Component {
     (err,res) => {
         if(!err) {
           toast.warning("Transaction sent!", {position: toast.POSITION.BOTTOM_RIGHT})
-          let referral = location.search.split('r=')[1];
-          referral = (referral == undefined) ? "None" : referral
-          ReactGA.event({
-            category: 'User',
-            action: 'Bought a phoenix',
-            label: referral
-          })
         } else {
           console.log("Transaction rejected", "error")
       }
