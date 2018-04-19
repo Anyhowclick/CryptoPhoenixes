@@ -78,8 +78,9 @@ h1, h2, h3 {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.homeTitle img {
-  max-width: 70%;
+#getStartedButton {
+  font-size: 2rem;
+  padding: .5rem 5rem;
 }
 
 #overpayCautionText {
@@ -317,6 +318,11 @@ h1, h2, h3 {
     margin: .3rem;
   }
   
+  #getStartedButton {
+    font-size: 1.5rem;
+    padding: .2rem 4rem;
+  }
+
   .loadingScreen {
     font-size: 2rem;
   }

@@ -111,8 +111,8 @@ library SafeMath {
 contract CryptoPhoenixesCivilWar is Ownable, Pausable {
   using SafeMath for uint256;
 
-  address public subDev1;
-  address public subDev2;
+  address public subDevOne;
+  address public subDevTwo;
   
   Phoenix[] public PHOENIXES;
   /*
@@ -142,6 +142,12 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
   uint256 constant public BASE_PRICE = 0.0025 ether;
   uint256 constant public PRICE_CUTOFF = 0.75 ether;
   
+  //Permission control
+  modifier onlyAuthorized() {
+      require(msg.sender == owner || msg.sender == subDevOne); //subDevTwo is NOT authorized
+      _;
+  }
+  
   //to check that a game has ended
   modifier gameHasEnded() {
       require(GAME_STARTED);
@@ -163,8 +169,10 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
   }
   
   // Events
+  event GameStarted();
+      
   event PhoenixPurchased(
-      uint256 _phoenixID,
+      uint256 phoenixID,
       address newOwner,
       uint256 price,
       uint256 nextPrice,
@@ -173,16 +181,19 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
   );
 
   event CaptainAbilityUsed(
-      uint256 _captainID
+      uint256 captainID
   );
   
   event PhoenixAbilityUsed(
-      uint256 _phoenixID,
+      uint256 phoenixID,
       uint256 payout,
       uint256 price,
       uint256 currentPower,
-      uint abilityAvailTime
+      uint abilityAvailTime,
+      address previousOwner
   );
+  
+  event GameEnded();
 
   event WithdrewFunds(
     address owner
@@ -198,17 +209,16 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
     uint basePower; // Starting exploding / stealing power of phoenix
     uint currentPower; // Current exploding / stealing power of phoenix
     uint powerIncreaseAmt; // Amt of power to increase with every flip
-    uint largerPowerDrop; // Power drop when price of phoenix > 1 ETH
-    uint lowerPowerDrop; // Power drop when price of phoenix < 1 ETH
+    uint powerDrop; // Power drop of phoenix upon ability usage
     uint powerCap; // Power should not exceed this amount
     address previousOwner;  // Owner of phoenix in previous round
     address currentOwner; // Current owner of phoenix
   }
   
 // Main function to set the beta period and sub developer
-  function CryptoPhoenixesCivilWar(address _subDev1, address _subDev2) {
-    subDev1 = _subDev1;
-    subDev2 = _subDev2;
+  function CryptoPhoenixesCivilWar(address _subDevOne, address _subDevTwo) {
+    subDevOne = _subDevOne;
+    subDevTwo = _subDevTwo;
     createPhoenixes();
   }
 
@@ -218,15 +228,14 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
           Phoenix memory phoenix = Phoenix({
               price: BASE_PRICE.mul(2), //0.005 ether
               payoutPercentage: 2400, //redundant for rainbow phoenix. Set to 24% for captains
-              cooldown: 16 hours, //redundant for rainbow phoenix
+              cooldown: 20 hours, //redundant for rainbow phoenix
               abilityAvailTime: 0, //will be set when game starts
               //Everything else not used
               cooldownDecreaseAmt: 0,
               basePower: 0,
               currentPower: 0,
               powerIncreaseAmt: 0,
-              largerPowerDrop: 0,
-              lowerPowerDrop: 0,
+              powerDrop: 0,
               powerCap: 0,
               previousOwner: address(0),
               currentOwner: address(0)
@@ -241,9 +250,11 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
       //Now, for normal phoenixes
       uint16[4] memory PAYOUTS = [400,700,1100,1600]; //4%, 7%, 11%, 16%
       uint16[4] memory COOLDOWN = [2 hours, 4 hours, 8 hours, 16 hours];
-      uint16[4] memory COOLDOWN_DECREASE = [9 minutes, 19 minutes, 24 minutes, 48 minutes];
-      uint8[4] memory POWER_INC_AMT = [25,50,100,150]; //0.25%, 0.5%, 1%, 1.5%
-      uint16[4] memory CAPPED_POWER = [2000,3000,4500,6000]; //20%, 30%, 45%, 60%
+      uint16[4] memory COOLDOWN_DECREASE = [9 minutes, 15 minutes, 26 minutes, 45 minutes];
+      uint8[4] memory POWER_INC_AMT = [25,50,100,175]; //0.25%, 0.5%, 1%, 1.75%
+      uint16[4] memory POWER_DROP = [150,300,600,1000]; //1.5%, 3%, 6%, 10%
+      uint16[4] memory CAPPED_POWER = [1000,2000,3500,6000]; //10%, 20%, 35%, 60%
+      
       
       for (i = 0; i < 4; i++) {
           for (uint256 j = 0; j < 4; j++) {
@@ -256,8 +267,7 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
               basePower: (j+1)*100, //100, 200, 300, 400 = 1%, 2%, 3%, 4%
               currentPower: (j+1)*100,
               powerIncreaseAmt: POWER_INC_AMT[j],
-              largerPowerDrop: (j+1)*500, //50, 100, 150, 200 = 5%, 10%, 15%, 20%
-              lowerPowerDrop: (j+1)*300, //30, 60, 90, 120 = 3%, 6%, 9%, 12%
+              powerDrop: POWER_DROP[j],
               powerCap: CAPPED_POWER[j],
               previousOwner: address(0),
               currentOwner: address(0)
@@ -268,7 +278,7 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
       }
   }
   
-  function startGame() public noGameInProgress onlyOwner {
+  function startGame() public noGameInProgress onlyAuthorized {
       //reset scores
       SCORES[0] = 0;
       SCORES[1] = 0;
@@ -281,6 +291,7 @@ contract CryptoPhoenixesCivilWar is Ownable, Pausable {
       GAME_STARTED = true;
       //set game duration to be 1 day
       GAME_END = now + 1 days;
+      emit GameStarted();
   }
   
   //Set bag holders from version 1.0
@@ -343,9 +354,6 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
           POOLS[1] = POOLS[1].add(poolCut); //add pool cut to blue team
       }
       
-      //just in case, set captainCut to zero since it has served its purpose
-      captainCut = 0;
-      
       //transfer rainbowCut to rainbow phoenix owner
       userFunds[PHOENIXES[0].currentOwner] = userFunds[PHOENIXES[0].currentOwner].add(rainbowCut);
 
@@ -381,8 +389,8 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
       outgoingOwnerCut = _price;
       purchaseExcess = _amtPaid.sub(_price);
       
-      //Take 4% cut from excess
-      uint256 excessPoolCut = purchaseExcess.mul(4).div(100); //4%
+      //Take 5% cut from excess
+      uint256 excessPoolCut = purchaseExcess.div(20); //5%
       purchaseExcess = purchaseExcess.sub(excessPoolCut);
       
       //3% of price to devs
@@ -391,6 +399,8 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
       distributeDevCut(cut);
       
       //1% of price to owner in previous round, 1% to captain (if applicable)
+      //abusing variable name to use for previous owner and captain fees, since they are the same
+      
       captainCut = _price.div(100); //1%
       outgoingOwnerCut = outgoingOwnerCut.sub(captainCut).sub(captainCut); //subtract twice
       userFunds[_previousOwner] = userFunds[_previousOwner].add(captainCut); //1% for previous owner
@@ -404,15 +414,15 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
       outgoingOwnerCut = outgoingOwnerCut.sub(poolCut);
       /*
       add the poolCut and excessPoolCut together
-      so poolCut = 11-13% of price + 4% of purchaseExcess
+      so poolCut = 11-13% of price + 5% of purchaseExcess
       */
       poolCut = poolCut.add(excessPoolCut);
   }
   
   function distributeDevCut(uint256 _cut) private {
       devFunds[owner] = devFunds[owner].add(_cut.div(2)); //50% to owner
-      devFunds[subDev1] = devFunds[subDev1].add(_cut.div(4)); //25% to subDev1
-      devFunds[subDev2] = devFunds[subDev2].add(_cut.div(4)); //25% to subDev2
+      devFunds[subDevOne] = devFunds[subDevOne].add(_cut.div(4)); //25% to subDevOne
+      devFunds[subDevTwo] = devFunds[subDevTwo].add(_cut.div(4)); //25% to subDevTwo
   }
   
 /**
@@ -472,15 +482,15 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
       }
       
       for (uint i = groupIDStart; i < groupIDEnd; i++) {
-          //Multiply team power by 2x
-          PHOENIXES[i].currentPower = PHOENIXES[i].currentPower.mul(2); 
+          //Multiply team power by 1.5x
+          PHOENIXES[i].currentPower = PHOENIXES[i].currentPower.mul(3).div(2); 
           //ensure cap not breached
           if (PHOENIXES[i].currentPower > PHOENIXES[i].powerCap) {
               PHOENIXES[i].currentPower = PHOENIXES[i].powerCap;
           }
       }
       
-      captain.abilityAvailTime = GAME_END + 1 seconds; //Prevent ability from being used again in current round
+      captain.abilityAvailTime = GAME_END + 10 seconds; //Prevent ability from being used again in current round
       
       emit CaptainAbilityUsed(_captainID);
   }
@@ -493,35 +503,31 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
       Phoenix storage phoenix = PHOENIXES[_phoenixID];
       require(msg.sender == phoenix.currentOwner); //Only owner of phoenix can use ability
       require(now >= phoenix.abilityAvailTime); //Ability must be available for use
-      
-      //calculate which team the phoenix is on
-      if (_phoenixID < 11) { //red team
-          uint256 SCORE = SCORES[0]; //red score
-          bool isRed = true; //to determine which team to distribute the 7% payout to
-      } else {
-          //blue team
-          SCORE = SCORES[1]; //blue score
-          isRed = false;
-      }
-      
+
       //calculate which pool to take from
       //ids 3-6, 15-18 --> red
       //ids 7-14 --> blue
       if (_phoenixID >=7 &&  _phoenixID <= 14) {
-          uint256 POOL = POOLS[1]; //blue pool
+          require(POOLS[1] > 0); //blue pool
+          uint256 payout = POOLS[1].mul(phoenix.currentPower).div(DENOMINATOR); //calculate payout
+          POOLS[1] = POOLS[1].sub(payout); //subtract from pool
       } else {
-          POOL = POOLS[0]; //red pool
+          require(POOLS[0] > 0); //red pool
+          payout = POOLS[0].mul(phoenix.currentPower).div(DENOMINATOR);
+          POOLS[0] = POOLS[0].sub(payout);
       }
       
-      require(POOL > 0);
-      uint256 payout = POOL.mul(phoenix.currentPower).div(DENOMINATOR);
-      uint256 ownerCut = payout;
+      //calculate which team the phoenix is on
+      if (_phoenixID < 11) { //red team
+          bool isRed = true; //to determine which team to distribute the 9% payout to
+          SCORES[0] = SCORES[0].add(payout); //add payout to score
+      } else {
+          //blue team
+          isRed = false;
+          SCORES[1] = SCORES[1].add(payout);
+      }
       
-      // add score
-      SCORE = SCORE.add(payout);
-
-      //subtract from phoenix_POOL
-      POOL = POOL.sub(payout);
+      uint256 ownerCut = payout;
       
       //drop power of phoenix based on its price
       decreasePower(_phoenixID);
@@ -546,15 +552,15 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
       ownerCut = ownerCut.sub(cut);
       distributeDevCut(cut);
       
-      //7% to team
-      cut = payout.mul(7).div(100); //7%
+      //9% to team
+      cut = payout.mul(9).div(100); //9%
       ownerCut = ownerCut.sub(cut);
       distributeTeamCut(isRed,cut);
       
       //Finally, send money to user
       sendFunds(msg.sender,ownerCut);
       
-      emit PhoenixAbilityUsed(_phoenixID,ownerCut,phoenix.price,phoenix.currentPower,phoenix.abilityAvailTime);
+      emit PhoenixAbilityUsed(_phoenixID,ownerCut,phoenix.price,phoenix.currentPower,phoenix.abilityAvailTime,phoenix.previousOwner);
   }
   
   function decreasePrice(uint256 _phoenixID) private {
@@ -571,15 +577,12 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
   
   function decreasePower(uint256 _phoenixID) private {
       Phoenix storage phoenix = PHOENIXES[_phoenixID];
-      uint powerDrop = phoenix.largerPowerDrop; //initialise powerDrop to higher amount
-      if (phoenix.price < PRICE_CUTOFF) {
-          powerDrop = phoenix.lowerPowerDrop; //if lower than cutoff, use lower amount
-      }
+      
       //handle boundary case where currentPower is below powerDrop
-      if (phoenix.currentPower < powerDrop) {
+      if (phoenix.currentPower < phoenix.powerDrop) {
           phoenix.currentPower = phoenix.basePower; 
       } else {
-          phoenix.currentPower = phoenix.currentPower.sub(powerDrop);
+          phoenix.currentPower = phoenix.currentPower.sub(phoenix.powerDrop);
       }
   }
   
@@ -620,36 +623,39 @@ function purchasePhoenix(uint256 _phoenixID) whenNotPaused gameInProgress public
       uint256 remainingPoolAmt = POOLS[0].add(POOLS[1]); //add the 2 pools together
       
       //Distribution structure -> 15% rainbow, 75% teams, 10% for next game
+      uint256 rainbowCut = remainingPoolAmt.mul(15).div(100); //15% to rainbow
+      uint256 teamCut = remainingPoolAmt.mul(75).div(100); //75% to teams
+      remainingPoolAmt = remainingPoolAmt.sub(rainbowCut).sub(teamCut);
       
-      //15% to rainbow
-      uint256 cut = remainingPoolAmt.mul(15).div(100);
-      userFunds[PHOENIXES[0].currentOwner] = userFunds[PHOENIXES[0].currentOwner].add(cut);
+      
+      //distribute 10% to rainbow phoenix owner
+      userFunds[PHOENIXES[0].currentOwner] = userFunds[PHOENIXES[0].currentOwner].add(rainbowCut);
       
       //distribute 75% to teams
       //in the unlikely event of a draw, split evenly, so 37.5% cut to each team
       if (SCORES[0] == SCORES[1]) {
-          cut = remainingPoolAmt.mul(375).div(1000); //37.5%
-          distributeTeamCut(true,cut); //redTeam
-          distributeTeamCut(false,cut); //blueTeam
+          teamCut = teamCut.div(2);
+          distributeTeamCut(true,teamCut); //redTeam
+          distributeTeamCut(false,teamCut); //blueTeam
       } else {
-          //50% to winning team
-          cut = remainingPoolAmt.div(2);
+          //25% to losing team
+          uint256 losingTeamCut = teamCut.div(3); // 1 third of 75% = 25%
           //SCORES[0] = red, SCORES[1] = blue
           //if red > blue, then award to redTeam, so bool _isRed = red > blue
-          distributeTeamCut((SCORES[0] > SCORES[1]),cut);
+          distributeTeamCut((SCORES[0] > SCORES[1]),losingTeamCut);
           
-          //25% to losing team
-          cut = remainingPoolAmt.div(4);
+          //50% to winning team
+          teamCut = teamCut.sub(losingTeamCut); //take the remainder
           //inverse of the winning condition
-          distributeTeamCut(!(SCORES[0] > SCORES[1]),cut); 
+          distributeTeamCut(!(SCORES[0] > SCORES[1]),teamCut); 
       }
       
-      
-      //5% to each pool for next game
-      POOLS[0] = remainingPoolAmt.div(20);
+      // 5% to each pool for next game
+      POOLS[0] = remainingPoolAmt.div(2);
       POOLS[1] = POOLS[0];
       
       resetPhoenixes();
+      emit GameEnded();
   }
   
   function resetPhoenixes() private {

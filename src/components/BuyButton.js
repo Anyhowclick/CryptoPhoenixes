@@ -95,7 +95,7 @@ export default class BuyButton extends Component {
     }
     return (
       <InputGroup>
-        <Input className="buyButton" name="userPrice" value={this.state.userPrice} onChange={this.handleChange}/>
+        <Input type="number" className="buyButton" name="userPrice" value={this.state.userPrice} onChange={this.handleChange}/>
         <Button color={this.state.team} size="sm" onClick={this.buyPhoenix}>Buy</Button>
       </InputGroup>
     )
