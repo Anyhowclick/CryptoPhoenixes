@@ -165,11 +165,11 @@ h1, h2, h3 {
 }
 
 #gameScores {
-  font-size: 4rem;
+  font-size: 3.5rem;
 }
 
 .poolAmt {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 .phoenixesContainer {
@@ -336,11 +336,11 @@ h1, h2, h3 {
   }
   
   #gameScores {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   .poolAmt {
-    font-size: 1rem;
+    font-size: .8rem;
   }
 
   #overpayCautionText, .claimFundButton {

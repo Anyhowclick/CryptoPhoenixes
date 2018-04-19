@@ -51,6 +51,7 @@ export default class CaptainAbilityButton extends Component {
 
   componentWillUpdate(nextProps) {
     if (nextProps.gameEnd != this.props.gameEnd) {
+      this.setState({ gameEnded: false })
       let time = new Date().getTime()
       time = Math.max(0,parseInt(nextProps.gameEnd*1000)-parseInt(time))
       setTimeout(() => {

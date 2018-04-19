@@ -50,7 +50,7 @@ class Battlefield extends Component {
         if (!err) {
           if(res.blockNumber > self.state.blockNumber) {
             self.setState({ blockNumber: res.blockNumber })
-            self.props.dispatch(fetchGame())
+            self.props.dispatch(fetchGame(self.props.contract))
             self.fetchAllPhoenixes()
             self.gameStartNotif()
           }

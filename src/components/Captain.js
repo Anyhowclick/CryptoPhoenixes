@@ -26,7 +26,7 @@ const coundownRenderer = ({ isOwner, id, cooldown, abilityAvailTime, price, game
             contract={contract}
             account={account}
             />
-    } else if (abilityAvailTime > gameEnd) {
+    } else if (abilityAvailTime > gameEnd && new Date().getTime() < gameEnd*1000) {
     return <Button color={(team == 'redTeamBG') ? 'danger' : 'info'} block className="explosionText" disabled>Ability used</Button>
     } else {
     return <CountdownButton 

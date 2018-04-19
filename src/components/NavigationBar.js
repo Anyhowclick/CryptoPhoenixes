@@ -59,7 +59,7 @@ export default class NavigationBar extends React.Component {
       <Navbar className="wrongNetworkBar">
         <Nav navbar>
         <NavItem>
-          Wrong Network Detected. Kindly switch to the Rinkeby testnet.
+          Wrong Network Detected. Kindly switch to the mainnet.
         </NavItem>
         </Nav>
       </Navbar>
@@ -85,7 +85,7 @@ export default class NavigationBar extends React.Component {
                 <NavLink href="/myPhoenixes">My Phoenixes</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href={CONTRACT_LINK} target="blank">Contract Source</NavLink>
+                <NavLink href={CONTRACT_LINK} target="blank">Contract</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://vyper.io/c/4011gokqk" target="blank">Invite Contest</NavLink>
