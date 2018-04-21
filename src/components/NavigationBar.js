@@ -88,9 +88,6 @@ export default class NavigationBar extends React.Component {
                 <NavLink href={CONTRACT_LINK} target="blank">Contract</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://vyper.io/c/4011gokqk" target="blank">Invite Contest</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="https://discord.gg/YMxXeqW" target="blank">
                 <img className="discordIcon" src={Discord} />
                 </NavLink>
