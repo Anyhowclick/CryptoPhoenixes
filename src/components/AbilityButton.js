@@ -88,6 +88,8 @@ export default class AbilityButton extends Component {
   render() {
     if (this.state.gameEnded) {
       return null
+    } else if (this.props.powerDrop > this.props.currentPower) {
+      return  <Button color={this.state.team} disabled block className="explosionText">Insufficient power</Button>
     } else if (this.props.isOwner) {
       return (
         <div>

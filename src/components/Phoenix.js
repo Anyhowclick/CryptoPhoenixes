@@ -14,7 +14,7 @@ import BuyButton from './BuyButton'
 import CountdownButton from './CountdownButton'
 import PauseButton from './PauseButton'
 
-const coundownRenderer = ({ isOwner, id, cooldown, price, gameEnd, team, web3, contract, account, currentPower, lowerPower, hours, minutes, seconds, completed }) => {
+const coundownRenderer = ({ isOwner, id, cooldown, price, gameEnd, team, web3, contract, account, currentPower, lowerPower, powerDrop, hours, minutes, seconds, completed }) => {
   let date = new Date().getTime()
   if (completed) {
     // Render a completed state
@@ -29,6 +29,7 @@ const coundownRenderer = ({ isOwner, id, cooldown, price, gameEnd, team, web3, c
             account={account}
             currentPower={currentPower}
             lowerPower={lowerPower}
+            powerDrop={powerDrop}
             />
     } else if (date > parseInt(gameEnd)*1000){
       return null
@@ -150,6 +151,7 @@ export default class PhoenixCard extends Component {
     contract={this.props.contract}
     account={this.props.account}
     currentPower={this.props.currentPower}
+    powerDrop={this.props.powerDrop}
     lowerPower={Math.max(this.props.currentPower-this.props.powerDrop,this.props.basePower)}
     />
     )
